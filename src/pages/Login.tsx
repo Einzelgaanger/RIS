@@ -67,14 +67,9 @@ export default function Login() {
         {/* Content Overlay */}
         <div className="relative z-10 flex flex-col justify-between p-12 text-white">
           {/* Logo */}
-          <div className="flex items-center gap-3">
-            <div className="w-12 h-12 rounded-xl bg-white/20 backdrop-blur-sm flex items-center justify-center">
-              <span className="font-display font-bold text-2xl">R</span>
-            </div>
-            <div>
-              <span className="font-display font-bold text-xl">GVTS RIP</span>
-              <p className="text-sm text-white/70">Resource Intelligence Platform</p>
-            </div>
+          <div>
+            <span className="font-display font-bold text-2xl">GVTS RIP</span>
+            <p className="text-sm text-white/70">Resource Intelligence Platform</p>
           </div>
 
           {/* Main Content */}
@@ -128,14 +123,9 @@ export default function Login() {
       <div className="flex-1 flex flex-col justify-center px-6 py-8 lg:px-10 xl:px-16 bg-background overflow-y-auto">
         <div className="w-full max-w-md mx-auto">
           {/* Mobile Logo */}
-          <div className="lg:hidden flex items-center gap-3 mb-8">
-            <div className="w-12 h-12 rounded-xl gradient-primary flex items-center justify-center">
-              <span className="font-display font-bold text-2xl text-white">R</span>
-            </div>
-            <div>
-              <span className="font-display font-bold text-xl">GVTS RIP</span>
-              <p className="text-sm text-muted-foreground">Resource Intelligence</p>
-            </div>
+          <div className="lg:hidden mb-8">
+            <span className="font-display font-bold text-xl">GVTS RIP</span>
+            <p className="text-sm text-muted-foreground">Resource Intelligence Platform</p>
           </div>
 
           {/* Welcome text */}

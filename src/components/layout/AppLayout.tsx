@@ -74,12 +74,9 @@ export default function AppLayout() {
       )}>
         <div className="flex h-full flex-col">
           {/* Logo */}
-          <div className="flex h-16 items-center gap-2 px-6 border-b border-sidebar-border">
-            <div className="flex items-center justify-center w-10 h-10 rounded-lg gradient-primary">
-              <Building2 className="h-6 w-6 text-white" />
-            </div>
+          <div className="flex h-16 items-center px-6 border-b border-sidebar-border">
             <div className="flex flex-col">
-              <span className="font-bold text-sidebar-foreground">GVTS RIP</span>
+              <span className="font-display font-bold text-lg text-sidebar-foreground">GVTS RIP</span>
               <span className="text-xs text-sidebar-foreground/60">Resource Intelligence</span>
             </div>
           </div>
