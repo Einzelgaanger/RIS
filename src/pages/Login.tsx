@@ -38,9 +38,9 @@ export default function Login() {
   };
 
   const demoAccounts = [
-    { email: 'admin@gvts.com', password: 'admin123', role: 'GVTS Admin', desc: 'Full platform access', color: 'from-primary to-blue-600' },
-    { email: 'manager@riby.com', password: 'manager123', role: 'VGG Manager', desc: 'Team management', color: 'from-secondary to-orange-500' },
-    { email: 'professional@vgg.com', password: 'pro123', role: 'Professional', desc: 'Profile access', color: 'from-emerald-500 to-teal-500' },
+    { email: 'admin@gvts.com', password: 'admin123', role: 'GVTS Admin', desc: 'Full platform access', color: 'from-primary to-blue-600', icon: Shield },
+    { email: 'manager@riby.com', password: 'manager123', role: 'VGG Manager', desc: 'Team management', color: 'from-secondary to-orange-500', icon: Users },
+    { email: 'professional@vgg.com', password: 'pro123', role: 'Professional', desc: 'Profile access', color: 'from-emerald-500 to-teal-500', icon: Target },
   ];
 
   const features = [
@@ -51,7 +51,7 @@ export default function Login() {
   ];
 
   return (
-    <div className="min-h-screen flex">
+    <div className="h-screen flex overflow-hidden">
       {/* Left side - Hero Image */}
       <div className="hidden lg:flex lg:w-1/2 xl:w-3/5 relative overflow-hidden">
         {/* Background Image */}
@@ -61,8 +61,8 @@ export default function Login() {
           className="absolute inset-0 w-full h-full object-cover"
         />
         
-        {/* Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/90 via-primary/70 to-transparent" />
+        {/* Gradient Overlay - reduced opacity */}
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/60 via-primary/40 to-transparent" />
         
         {/* Content Overlay */}
         <div className="relative z-10 flex flex-col justify-between p-12 text-white">
@@ -125,7 +125,7 @@ export default function Login() {
       </div>
 
       {/* Right side - Login Form */}
-      <div className="flex-1 flex flex-col justify-center px-6 py-12 lg:px-12 xl:px-20 bg-background">
+      <div className="flex-1 flex flex-col justify-center px-6 py-8 lg:px-10 xl:px-16 bg-background overflow-y-auto">
         <div className="w-full max-w-md mx-auto">
           {/* Mobile Logo */}
           <div className="lg:hidden flex items-center gap-3 mb-8">
@@ -238,7 +238,7 @@ export default function Login() {
           </div>
 
           {/* Demo accounts */}
-          <div className="space-y-3">
+          <div className="space-y-2">
             {demoAccounts.map((account) => (
               <button
                 key={account.email}
@@ -250,7 +250,7 @@ export default function Login() {
                 className="w-full group"
               >
                 <div className={cn(
-                  "relative p-4 rounded-xl border bg-card overflow-hidden",
+                  "relative p-3 rounded-xl border bg-card overflow-hidden",
                   "hover:border-primary/30 hover:shadow-lg transition-all duration-300"
                 )}>
                   {/* Gradient accent */}
@@ -259,14 +259,20 @@ export default function Login() {
                     account.color
                   )} />
                   
-                  <div className="flex items-center justify-between pl-3">
-                    <div className="text-left">
-                      <p className="font-semibold group-hover:text-primary transition-colors">
+                  <div className="flex items-center gap-3 pl-3">
+                    <div className={cn(
+                      "w-9 h-9 rounded-lg flex items-center justify-center bg-gradient-to-br",
+                      account.color
+                    )}>
+                      <account.icon className="h-4 w-4 text-white" />
+                    </div>
+                    <div className="text-left flex-1">
+                      <p className="font-semibold text-sm group-hover:text-primary transition-colors">
                         {account.role}
                       </p>
-                      <p className="text-sm text-muted-foreground">{account.desc}</p>
+                      <p className="text-xs text-muted-foreground">{account.desc}</p>
                     </div>
-                    <ArrowRight className="h-5 w-5 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all" />
+                    <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all" />
                   </div>
                 </div>
               </button>
@@ -274,7 +280,7 @@ export default function Login() {
           </div>
 
           {/* Footer */}
-          <p className="text-center text-xs text-muted-foreground mt-8">
+          <p className="text-center text-xs text-muted-foreground mt-6">
             By signing in, you agree to our{' '}
             <a href="#" className="text-primary hover:underline">Terms of Service</a>
             {' '}and{' '}
