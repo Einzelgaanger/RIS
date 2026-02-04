@@ -8,6 +8,7 @@ export default defineConfig(({ mode }) => ({
   server: {
     host: "::",
     port: 8080,
+    allowedHosts: ["ris.vgg.app", "ris-c6w2.onrender.com"],
     hmr: {
       overlay: false,
     },
