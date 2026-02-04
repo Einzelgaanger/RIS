@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import { useNavigate, Navigate } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
-import { Building2, Eye, EyeOff, Loader2 } from 'lucide-react';
+import { Eye, EyeOff, Loader2, ArrowRight, Sparkles, Users, Target, Shield } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Alert, AlertDescription } from '@/components/ui/alert';
+import { cn } from '@/lib/utils';
+import authHeroImage from '@/assets/auth-hero.jpg';
 
 export default function Login() {
   const { login, isAuthenticated } = useAuth();
@@ -37,101 +38,207 @@ export default function Login() {
   };
 
   const demoAccounts = [
-    { email: 'admin@gvts.com', password: 'admin123', role: 'GVTS Admin', desc: 'Full platform access' },
-    { email: 'manager@riby.com', password: 'manager123', role: 'VGG Manager', desc: 'Team management access' },
-    { email: 'professional@vgg.com', password: 'pro123', role: 'Professional', desc: 'Individual profile access' },
+    { email: 'admin@gvts.com', password: 'admin123', role: 'GVTS Admin', desc: 'Full platform access', color: 'from-primary to-blue-600' },
+    { email: 'manager@riby.com', password: 'manager123', role: 'VGG Manager', desc: 'Team management', color: 'from-secondary to-orange-500' },
+    { email: 'professional@vgg.com', password: 'pro123', role: 'Professional', desc: 'Profile access', color: 'from-emerald-500 to-teal-500' },
+  ];
+
+  const features = [
+    { icon: Users, text: 'Access 500+ verified professionals' },
+    { icon: Target, text: 'AI-powered team matching' },
+    { icon: Sparkles, text: 'Intelligent resource analytics' },
+    { icon: Shield, text: 'Enterprise-grade security' },
   ];
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-background via-muted/30 to-background p-4">
-      <div className="w-full max-w-md space-y-6">
-        {/* Logo and title */}
-        <div className="text-center space-y-2">
-          <div className="flex items-center justify-center gap-3 mb-4">
-            <div className="flex items-center justify-center w-14 h-14 rounded-xl gradient-primary shadow-lg">
-              <Building2 className="h-8 w-8 text-white" />
+    <div className="min-h-screen flex">
+      {/* Left side - Hero Image */}
+      <div className="hidden lg:flex lg:w-1/2 xl:w-3/5 relative overflow-hidden">
+        {/* Background Image */}
+        <img 
+          src={authHeroImage} 
+          alt="Resource Intelligence Network"
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+        
+        {/* Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/90 via-primary/70 to-transparent" />
+        
+        {/* Content Overlay */}
+        <div className="relative z-10 flex flex-col justify-between p-12 text-white">
+          {/* Logo */}
+          <div className="flex items-center gap-3">
+            <div className="w-12 h-12 rounded-xl bg-white/20 backdrop-blur-sm flex items-center justify-center">
+              <span className="font-display font-bold text-2xl">R</span>
+            </div>
+            <div>
+              <span className="font-display font-bold text-xl">GVTS RIP</span>
+              <p className="text-sm text-white/70">Resource Intelligence Platform</p>
             </div>
           </div>
-          <h1 className="text-3xl font-bold tracking-tight">GVTS Resource Intelligence</h1>
-          <p className="text-muted-foreground">Sign in to access the platform</p>
-        </div>
 
-        {/* Login card */}
-        <Card className="shadow-xl border-0 bg-card/80 backdrop-blur">
-          <CardHeader className="space-y-1 pb-4">
-            <CardTitle className="text-xl">Welcome back</CardTitle>
-            <CardDescription>Enter your credentials to continue</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <form onSubmit={handleSubmit} className="space-y-4">
-              {error && (
-                <Alert variant="destructive">
-                  <AlertDescription>{error}</AlertDescription>
-                </Alert>
-              )}
+          {/* Main Content */}
+          <div className="max-w-lg space-y-8">
+            <div>
+              <h1 className="font-display text-5xl xl:text-6xl font-bold leading-tight mb-4">
+                Build winning teams in{' '}
+                <span className="text-secondary">seconds</span>
+              </h1>
+              <p className="text-lg text-white/80 leading-relaxed">
+                The intelligent talent marketplace that transforms how you discover, 
+                match, and deploy resources across the Venture Garden ecosystem.
+              </p>
+            </div>
 
-              <div className="space-y-2">
-                <Label htmlFor="email">Email</Label>
-                <Input
-                  id="email"
-                  type="email"
-                  placeholder="you@example.com"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                  className="h-11"
-                />
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="password">Password</Label>
-                <div className="relative">
-                  <Input
-                    id="password"
-                    type={showPassword ? 'text' : 'password'}
-                    placeholder="••••••••"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                    className="h-11 pr-10"
-                  />
-                  <Button
-                    type="button"
-                    variant="ghost"
-                    size="icon"
-                    className="absolute right-1 top-1/2 -translate-y-1/2 h-8 w-8"
-                    onClick={() => setShowPassword(!showPassword)}
-                  >
-                    {showPassword ? (
-                      <EyeOff className="h-4 w-4 text-muted-foreground" />
-                    ) : (
-                      <Eye className="h-4 w-4 text-muted-foreground" />
-                    )}
-                  </Button>
+            {/* Feature list */}
+            <div className="grid grid-cols-2 gap-4">
+              {features.map((feature, i) => (
+                <div 
+                  key={i}
+                  className="flex items-center gap-3 p-3 rounded-xl bg-white/10 backdrop-blur-sm"
+                >
+                  <div className="w-10 h-10 rounded-lg bg-white/20 flex items-center justify-center">
+                    <feature.icon className="w-5 h-5" />
+                  </div>
+                  <span className="text-sm font-medium">{feature.text}</span>
                 </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Stats */}
+          <div className="flex gap-12">
+            <div>
+              <p className="font-display text-4xl font-bold">500+</p>
+              <p className="text-sm text-white/70">Verified Professionals</p>
+            </div>
+            <div>
+              <p className="font-display text-4xl font-bold">98%</p>
+              <p className="text-sm text-white/70">Match Success Rate</p>
+            </div>
+            <div>
+              <p className="font-display text-4xl font-bold">5min</p>
+              <p className="text-sm text-white/70">Avg. Team Assembly</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Right side - Login Form */}
+      <div className="flex-1 flex flex-col justify-center px-6 py-12 lg:px-12 xl:px-20 bg-background">
+        <div className="w-full max-w-md mx-auto">
+          {/* Mobile Logo */}
+          <div className="lg:hidden flex items-center gap-3 mb-8">
+            <div className="w-12 h-12 rounded-xl gradient-primary flex items-center justify-center">
+              <span className="font-display font-bold text-2xl text-white">R</span>
+            </div>
+            <div>
+              <span className="font-display font-bold text-xl">GVTS RIP</span>
+              <p className="text-sm text-muted-foreground">Resource Intelligence</p>
+            </div>
+          </div>
+
+          {/* Welcome text */}
+          <div className="mb-8">
+            <h2 className="font-display text-3xl font-bold tracking-tight mb-2">
+              Welcome back
+            </h2>
+            <p className="text-muted-foreground">
+              Sign in to access your dashboard and resources
+            </p>
+          </div>
+
+          {/* Login Form */}
+          <form onSubmit={handleSubmit} className="space-y-5">
+            {error && (
+              <Alert variant="destructive" className="animate-slide-in-top">
+                <AlertDescription>{error}</AlertDescription>
+              </Alert>
+            )}
+
+            <div className="space-y-2">
+              <Label htmlFor="email" className="text-sm font-medium">
+                Email address
+              </Label>
+              <Input
+                id="email"
+                type="email"
+                placeholder="you@company.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                className="h-12 px-4 bg-muted/50 border-0 focus:bg-background focus:ring-2 focus:ring-primary/20 transition-all"
+              />
+            </div>
+
+            <div className="space-y-2">
+              <div className="flex items-center justify-between">
+                <Label htmlFor="password" className="text-sm font-medium">
+                  Password
+                </Label>
+                <button type="button" className="text-xs text-primary hover:underline">
+                  Forgot password?
+                </button>
               </div>
+              <div className="relative">
+                <Input
+                  id="password"
+                  type={showPassword ? 'text' : 'password'}
+                  placeholder="••••••••"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                  className="h-12 px-4 pr-12 bg-muted/50 border-0 focus:bg-background focus:ring-2 focus:ring-primary/20 transition-all"
+                />
+                <Button
+                  type="button"
+                  variant="ghost"
+                  size="icon"
+                  className="absolute right-1 top-1/2 -translate-y-1/2 h-10 w-10 text-muted-foreground hover:text-foreground"
+                  onClick={() => setShowPassword(!showPassword)}
+                >
+                  {showPassword ? (
+                    <EyeOff className="h-5 w-5" />
+                  ) : (
+                    <Eye className="h-5 w-5" />
+                  )}
+                </Button>
+              </div>
+            </div>
 
-              <Button type="submit" className="w-full h-11" disabled={loading}>
-                {loading ? (
-                  <>
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    Signing in...
-                  </>
-                ) : (
-                  'Sign in'
-                )}
-              </Button>
-            </form>
-          </CardContent>
-        </Card>
+            <Button 
+              type="submit" 
+              className="w-full h-12 font-semibold text-base gap-2 group" 
+              disabled={loading}
+            >
+              {loading ? (
+                <>
+                  <Loader2 className="h-5 w-5 animate-spin" />
+                  Signing in...
+                </>
+              ) : (
+                <>
+                  Sign in
+                  <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
+                </>
+              )}
+            </Button>
+          </form>
 
-        {/* Demo accounts */}
-        <Card className="border-dashed">
-          <CardHeader className="pb-3">
-            <CardTitle className="text-sm font-medium">Demo Accounts</CardTitle>
-            <CardDescription className="text-xs">Click to autofill credentials</CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-2">
+          {/* Divider */}
+          <div className="relative my-8">
+            <div className="absolute inset-0 flex items-center">
+              <div className="w-full border-t" />
+            </div>
+            <div className="relative flex justify-center text-xs uppercase">
+              <span className="bg-background px-3 text-muted-foreground">
+                Quick access demo
+              </span>
+            </div>
+          </div>
+
+          {/* Demo accounts */}
+          <div className="space-y-3">
             {demoAccounts.map((account) => (
               <button
                 key={account.email}
@@ -140,23 +247,40 @@ export default function Login() {
                   setEmail(account.email);
                   setPassword(account.password);
                 }}
-                className="w-full p-3 text-left rounded-lg border hover:bg-accent/50 transition-colors group"
+                className="w-full group"
               >
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-sm font-medium group-hover:text-primary transition-colors">
-                      {account.role}
-                    </p>
-                    <p className="text-xs text-muted-foreground">{account.desc}</p>
+                <div className={cn(
+                  "relative p-4 rounded-xl border bg-card overflow-hidden",
+                  "hover:border-primary/30 hover:shadow-lg transition-all duration-300"
+                )}>
+                  {/* Gradient accent */}
+                  <div className={cn(
+                    "absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b",
+                    account.color
+                  )} />
+                  
+                  <div className="flex items-center justify-between pl-3">
+                    <div className="text-left">
+                      <p className="font-semibold group-hover:text-primary transition-colors">
+                        {account.role}
+                      </p>
+                      <p className="text-sm text-muted-foreground">{account.desc}</p>
+                    </div>
+                    <ArrowRight className="h-5 w-5 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all" />
                   </div>
-                  <code className="text-xs bg-muted px-2 py-1 rounded">
-                    {account.email.split('@')[0]}
-                  </code>
                 </div>
               </button>
             ))}
-          </CardContent>
-        </Card>
+          </div>
+
+          {/* Footer */}
+          <p className="text-center text-xs text-muted-foreground mt-8">
+            By signing in, you agree to our{' '}
+            <a href="#" className="text-primary hover:underline">Terms of Service</a>
+            {' '}and{' '}
+            <a href="#" className="text-primary hover:underline">Privacy Policy</a>
+          </p>
+        </div>
       </div>
     </div>
   );
