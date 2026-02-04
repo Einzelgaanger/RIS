@@ -61,8 +61,8 @@ export default function Login() {
           className="absolute inset-0 w-full h-full object-cover"
         />
         
-        {/* Gradient Overlay - reduced opacity */}
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/60 via-primary/40 to-transparent" />
+        {/* Gradient Overlay - clearer image visibility */}
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/50 via-primary/30 to-transparent" />
         
         {/* Content Overlay */}
         <div className="relative z-10 flex flex-col justify-between p-12 text-white">
