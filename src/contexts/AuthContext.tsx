@@ -11,6 +11,7 @@ interface AuthContextType {
   canManageResources: () => boolean;
   canCreateOpportunities: () => boolean;
   canViewAnalytics: () => boolean;
+  canViewFinancials: () => boolean;
   canUploadProposals: () => boolean;
 }
 
@@ -71,6 +72,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return user?.role === 'gvts_admin' || user?.role === 'vgg_manager';
   }, [user]);
 
+  const canViewFinancials = useCallback((): boolean => {
+    return user?.role === 'gvts_admin';
+  }, [user]);
+
   const canUploadProposals = useCallback((): boolean => {
     return user?.role === 'gvts_admin';
   }, [user]);
@@ -86,6 +91,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         canManageResources,
         canCreateOpportunities,
         canViewAnalytics,
+        canViewFinancials,
         canUploadProposals,
       }}
     >
