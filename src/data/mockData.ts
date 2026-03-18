@@ -416,13 +416,13 @@ export const mockAssignments: Assignment[] = [
   },
 ];
 
-// Mock users for authentication
+// Legacy mock users retained temporarily for compile safety during migration
 export const mockUsers: User[] = [
   {
     id: 'admin-1',
     email: 'admin@gvts.com',
     fullName: 'Sarah Adeyemi',
-    role: 'gvts_admin',
+    role: 'admin',
     organization: 'GVTS',
     avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Sarah',
   },
@@ -430,7 +430,7 @@ export const mockUsers: User[] = [
     id: 'manager-1',
     email: 'manager@riby.com',
     fullName: 'Chidi Okonkwo',
-    role: 'vgg_manager',
+    role: 'manager',
     organization: 'Riby',
     avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Chidi',
   },

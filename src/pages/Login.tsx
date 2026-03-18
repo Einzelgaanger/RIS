@@ -1,281 +1,262 @@
 import { useState } from 'react';
-import { useNavigate, Navigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
+import { ArrowRight, Eye, EyeOff, Loader2, Mail, Shield, Sparkles } from 'lucide-react';
+
 import { useAuth } from '@/contexts/AuthContext';
-import { Eye, EyeOff, Loader2, ArrowRight, Sparkles, Users, Target, Shield } from 'lucide-react';
+import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Alert, AlertDescription } from '@/components/ui/alert';
-import { cn } from '@/lib/utils';
 import authHeroImage from '@/assets/auth-hero.jpg';
 
 export default function Login() {
-  const { login, isAuthenticated } = useAuth();
-  const navigate = useNavigate();
+  const { login, signUp, signInWithGoogle, requestPasswordReset, isAuthenticated, isLoading } = useAuth();
+
+  const [mode, setMode] = useState<'signin' | 'signup'>('signin');
+  const [fullName, setFullName] = useState('');
+  const [organization, setOrganization] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState('');
-  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState('');
+
+  if (isLoading) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-background">
+        <div className="flex items-center gap-3 text-muted-foreground">
+          <Loader2 className="h-5 w-5 animate-spin" />
+          Loading authentication...
+        </div>
+      </div>
+    );
+  }
 
   if (isAuthenticated) {
     return <Navigate to="/dashboard" replace />;
   }
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = async (event: React.FormEvent) => {
+    event.preventDefault();
     setError('');
-    setLoading(true);
+    setMessage('');
+    setSubmitting(true);
 
-    const success = await login(email, password);
-    
-    if (success) {
-      navigate('/dashboard');
+    if (mode === 'signin') {
+      const success = await login(email, password);
+      if (!success) setError('Unable to sign in with those credentials.');
     } else {
-      setError('Invalid email or password');
+      const result = await signUp({ email, password, fullName, organization });
+      if (!result.success) setError(result.message || 'Unable to create account.');
+      if (result.success) {
+        setMessage(result.message || 'Account created.');
+        setMode('signin');
+      }
     }
-    setLoading(false);
+
+    setSubmitting(false);
   };
 
-  const demoAccounts = [
-    { email: 'admin@gvts.com', password: 'admin123', role: 'GVTS Admin', desc: 'Full platform access', color: 'from-primary to-blue-600', icon: Shield },
-    { email: 'manager@riby.com', password: 'manager123', role: 'VGG Manager', desc: 'Team management', color: 'from-secondary to-orange-500', icon: Users },
-    { email: 'professional@vgg.com', password: 'pro123', role: 'Professional', desc: 'Profile access', color: 'from-emerald-500 to-teal-500', icon: Target },
-  ];
+  const handleGoogle = async () => {
+    setError('');
+    setSubmitting(true);
+    const success = await signInWithGoogle();
+    if (!success) setError('Google sign-in could not be started.');
+    setSubmitting(false);
+  };
 
-  const features = [
-    { icon: Users, text: 'Access 500+ verified professionals' },
-    { icon: Target, text: 'AI-powered team matching' },
-    { icon: Sparkles, text: 'Intelligent resource analytics' },
-    { icon: Shield, text: 'Enterprise-grade security' },
-  ];
+  const handleForgotPassword = async () => {
+    setError('');
+    setMessage('');
+    if (!email) {
+      setError('Enter your email first, then request a reset link.');
+      return;
+    }
+    const result = await requestPasswordReset(email);
+    if (!result.success) setError(result.message || 'Could not send reset email.');
+    if (result.success) setMessage(result.message || 'Reset email sent.');
+  };
 
   return (
-    <div className="h-screen flex overflow-hidden">
-      {/* Left side - Hero Image */}
-      <div className="hidden lg:flex lg:w-1/2 xl:w-3/5 relative overflow-hidden">
-        {/* Background Image */}
-        <img 
-          src={authHeroImage} 
-          alt="Resource Intelligence Network"
-          className="absolute inset-0 w-full h-full object-cover"
-        />
-        
-        {/* Gradient Overlay - clearer image visibility */}
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/50 via-primary/30 to-transparent" />
-        
-        {/* Content Overlay */}
-        <div className="relative z-10 flex flex-col justify-between p-12 text-white">
-          {/* Logo */}
+    <div className="flex min-h-screen overflow-hidden bg-background">
+      <div className="relative hidden lg:flex lg:w-1/2 xl:w-3/5">
+        <img src={authHeroImage} alt="GVTS Resource Intelligence Platform" className="absolute inset-0 h-full w-full object-cover" />
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/60 via-primary/35 to-background/10" />
+        <div className="relative z-10 flex flex-col justify-between p-12 text-primary-foreground">
           <div>
-            <span className="font-display font-bold text-2xl">GVTS RIP</span>
-            <p className="text-sm text-white/70">Resource Intelligence Platform</p>
+            <p className="font-display text-2xl font-bold">GVTS RIP</p>
+            <p className="text-sm text-primary-foreground/80">Production access for teams, managers, and delivery leads</p>
           </div>
 
-          {/* Main Content */}
-          <div className="max-w-lg space-y-8">
+          <div className="max-w-xl space-y-8">
             <div>
-              <h1 className="font-display text-5xl xl:text-6xl font-bold leading-tight mb-4">
-                Build winning teams in{' '}
-                <span className="text-secondary">seconds</span>
+              <h1 className="font-display text-5xl font-bold leading-tight xl:text-6xl">
+                Secure access to your <span className="text-secondary-foreground">live talent system</span>
               </h1>
-              <p className="text-lg text-white/80 leading-relaxed">
-                The intelligent talent marketplace that transforms how you discover, 
-                match, and deploy resources across the Venture Garden ecosystem.
+              <p className="mt-4 text-lg leading-relaxed text-primary-foreground/85">
+                Sign in with Google or email/password to manage resources, opportunities, and proposal teams with real backend data.
               </p>
             </div>
 
-            {/* Feature list */}
-            <div className="grid grid-cols-2 gap-4">
-              {features.map((feature, i) => (
-                <div 
-                  key={i}
-                  className="flex items-center gap-3 p-3 rounded-xl bg-white/10 backdrop-blur-sm"
-                >
-                  <div className="w-10 h-10 rounded-lg bg-white/20 flex items-center justify-center">
-                    <feature.icon className="w-5 h-5" />
-                  </div>
-                  <span className="text-sm font-medium">{feature.text}</span>
-                </div>
-              ))}
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+              <div className="rounded-xl bg-card/15 p-4 backdrop-blur-sm">
+                <Shield className="mb-3 h-5 w-5" />
+                <p className="text-sm font-medium">Role-based access</p>
+              </div>
+              <div className="rounded-xl bg-card/15 p-4 backdrop-blur-sm">
+                <Sparkles className="mb-3 h-5 w-5" />
+                <p className="text-sm font-medium">Live team planning</p>
+              </div>
+              <div className="rounded-xl bg-card/15 p-4 backdrop-blur-sm">
+                <Mail className="mb-3 h-5 w-5" />
+                <p className="text-sm font-medium">Verified accounts</p>
+              </div>
             </div>
           </div>
 
-          {/* Stats */}
-          <div className="flex gap-12">
+          <div className="flex gap-10 text-sm text-primary-foreground/80">
             <div>
-              <p className="font-display text-4xl font-bold">500+</p>
-              <p className="text-sm text-white/70">Verified Professionals</p>
+              <p className="text-3xl font-bold">Live</p>
+              <p>backend data</p>
             </div>
             <div>
-              <p className="font-display text-4xl font-bold">98%</p>
-              <p className="text-sm text-white/70">Match Success Rate</p>
+              <p className="text-3xl font-bold">Google</p>
+              <p>managed OAuth</p>
             </div>
             <div>
-              <p className="font-display text-4xl font-bold">5min</p>
-              <p className="text-sm text-white/70">Avg. Team Assembly</p>
+              <p className="text-3xl font-bold">Email</p>
+              <p>password sign-in</p>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Right side - Login Form */}
-      <div className="flex-1 flex flex-col justify-center px-6 py-8 lg:px-10 xl:px-16 bg-background overflow-y-auto">
-        <div className="w-full max-w-md mx-auto">
-          {/* Mobile Logo */}
-          <div className="lg:hidden mb-8">
-            <span className="font-display font-bold text-xl">GVTS RIP</span>
-            <p className="text-sm text-muted-foreground">Resource Intelligence Platform</p>
+      <div className="flex flex-1 items-center justify-center px-6 py-10 lg:px-10 xl:px-16">
+        <div className="w-full max-w-md">
+          <div className="mb-8 lg:hidden">
+            <p className="font-display text-xl font-bold">GVTS RIP</p>
+            <p className="text-sm text-muted-foreground">Production workspace sign-in</p>
           </div>
 
-          {/* Welcome text */}
           <div className="mb-8">
-            <h2 className="font-display text-3xl font-bold tracking-tight mb-2">
-              Welcome back
+            <h2 className="font-display text-3xl font-bold tracking-tight">
+              {mode === 'signin' ? 'Sign in' : 'Create account'}
             </h2>
             <p className="text-muted-foreground">
-              Sign in to access your dashboard and resources
+              {mode === 'signin'
+                ? 'Access the live platform with your verified account.'
+                : 'Create an account and verify your email to get started.'}
             </p>
           </div>
 
-          {/* Login Form */}
-          <form onSubmit={handleSubmit} className="space-y-5">
+          <div className="mb-5 grid grid-cols-2 rounded-lg bg-muted p-1">
+            <button
+              type="button"
+              className={mode === 'signin' ? 'rounded-md bg-background px-3 py-2 text-sm font-medium shadow-sm' : 'px-3 py-2 text-sm text-muted-foreground'}
+              onClick={() => setMode('signin')}
+            >
+              Sign in
+            </button>
+            <button
+              type="button"
+              className={mode === 'signup' ? 'rounded-md bg-background px-3 py-2 text-sm font-medium shadow-sm' : 'px-3 py-2 text-sm text-muted-foreground'}
+              onClick={() => setMode('signup')}
+            >
+              Sign up
+            </button>
+          </div>
+
+          <div className="space-y-4">
             {error && (
-              <Alert variant="destructive" className="animate-slide-in-top">
+              <Alert variant="destructive">
                 <AlertDescription>{error}</AlertDescription>
               </Alert>
             )}
+            {message && (
+              <Alert>
+                <AlertDescription>{message}</AlertDescription>
+              </Alert>
+            )}
 
-            <div className="space-y-2">
-              <Label htmlFor="email" className="text-sm font-medium">
-                Email address
-              </Label>
-              <Input
-                id="email"
-                type="email"
-                placeholder="you@company.com"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-                className="h-12 px-4 bg-muted/50 border-0 focus:bg-background focus:ring-2 focus:ring-primary/20 transition-all"
-              />
-            </div>
+            <Button type="button" variant="outline" className="w-full" onClick={handleGoogle} disabled={submitting}>
+              {submitting ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Sparkles className="mr-2 h-4 w-4" />}
+              Continue with Google
+            </Button>
 
-            <div className="space-y-2">
-              <div className="flex items-center justify-between">
-                <Label htmlFor="password" className="text-sm font-medium">
-                  Password
-                </Label>
-                <button type="button" className="text-xs text-primary hover:underline">
-                  Forgot password?
-                </button>
+            <div className="relative">
+              <div className="absolute inset-0 flex items-center">
+                <div className="w-full border-t" />
               </div>
-              <div className="relative">
-                <Input
-                  id="password"
-                  type={showPassword ? 'text' : 'password'}
-                  placeholder="••••••••"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
-                  className="h-12 px-4 pr-12 bg-muted/50 border-0 focus:bg-background focus:ring-2 focus:ring-primary/20 transition-all"
-                />
-                <Button
-                  type="button"
-                  variant="ghost"
-                  size="icon"
-                  className="absolute right-1 top-1/2 -translate-y-1/2 h-10 w-10 text-muted-foreground hover:text-foreground"
-                  onClick={() => setShowPassword(!showPassword)}
-                >
-                  {showPassword ? (
-                    <EyeOff className="h-5 w-5" />
-                  ) : (
-                    <Eye className="h-5 w-5" />
-                  )}
-                </Button>
+              <div className="relative flex justify-center text-xs uppercase">
+                <span className="bg-background px-3 text-muted-foreground">or use email</span>
               </div>
             </div>
 
-            <Button 
-              type="submit" 
-              className="w-full h-12 font-semibold text-base gap-2 group" 
-              disabled={loading}
-            >
-              {loading ? (
+            <form onSubmit={handleSubmit} className="space-y-4">
+              {mode === 'signup' && (
                 <>
-                  <Loader2 className="h-5 w-5 animate-spin" />
-                  Signing in...
-                </>
-              ) : (
-                <>
-                  Sign in
-                  <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
+                  <div className="space-y-2">
+                    <Label htmlFor="fullName">Full name</Label>
+                    <Input id="fullName" value={fullName} onChange={(event) => setFullName(event.target.value)} placeholder="Jane Doe" required />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="organization">Organization</Label>
+                    <Input id="organization" value={organization} onChange={(event) => setOrganization(event.target.value)} placeholder="GVTS" />
+                  </div>
                 </>
               )}
-            </Button>
-          </form>
 
-          {/* Divider */}
-          <div className="relative my-8">
-            <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t" />
-            </div>
-            <div className="relative flex justify-center text-xs uppercase">
-              <span className="bg-background px-3 text-muted-foreground">
-                Quick access demo
-              </span>
-            </div>
-          </div>
+              <div className="space-y-2">
+                <Label htmlFor="email">Email address</Label>
+                <Input id="email" type="email" value={email} onChange={(event) => setEmail(event.target.value)} placeholder="you@company.com" required />
+              </div>
 
-          {/* Demo accounts */}
-          <div className="space-y-2">
-            {demoAccounts.map((account) => (
-              <button
-                key={account.email}
-                type="button"
-                onClick={() => {
-                  setEmail(account.email);
-                  setPassword(account.password);
-                }}
-                className="w-full group"
-              >
-                <div className={cn(
-                  "relative p-3 rounded-xl border bg-card overflow-hidden",
-                  "hover:border-primary/30 hover:shadow-lg transition-all duration-300"
-                )}>
-                  {/* Gradient accent */}
-                  <div className={cn(
-                    "absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b",
-                    account.color
-                  )} />
-                  
-                  <div className="flex items-center gap-3 pl-3">
-                    <div className={cn(
-                      "w-9 h-9 rounded-lg flex items-center justify-center bg-gradient-to-br",
-                      account.color
-                    )}>
-                      <account.icon className="h-4 w-4 text-white" />
-                    </div>
-                    <div className="text-left flex-1">
-                      <p className="font-semibold text-sm group-hover:text-primary transition-colors">
-                        {account.role}
-                      </p>
-                      <p className="text-xs text-muted-foreground">{account.desc}</p>
-                    </div>
-                    <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all" />
-                  </div>
+              <div className="space-y-2">
+                <div className="flex items-center justify-between">
+                  <Label htmlFor="password">Password</Label>
+                  {mode === 'signin' && (
+                    <button type="button" className="text-xs text-primary hover:underline" onClick={() => void handleForgotPassword()}>
+                      Forgot password?
+                    </button>
+                  )}
                 </div>
-              </button>
-            ))}
-          </div>
+                <div className="relative">
+                  <Input
+                    id="password"
+                    type={showPassword ? 'text' : 'password'}
+                    value={password}
+                    onChange={(event) => setPassword(event.target.value)}
+                    placeholder={mode === 'signup' ? 'At least 8 characters' : 'Enter your password'}
+                    required
+                  />
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    size="icon"
+                    className="absolute right-1 top-1/2 h-8 w-8 -translate-y-1/2"
+                    onClick={() => setShowPassword((value) => !value)}
+                  >
+                    {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                  </Button>
+                </div>
+              </div>
 
-          {/* Footer */}
-          <p className="text-center text-xs text-muted-foreground mt-6">
-            By signing in, you agree to our{' '}
-            <a href="#" className="text-primary hover:underline">Terms of Service</a>
-            {' '}and{' '}
-            <a href="#" className="text-primary hover:underline">Privacy Policy</a>
-          </p>
+              <Button type="submit" className="w-full gap-2" disabled={submitting}>
+                {submitting ? (
+                  <>
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                    Working...
+                  </>
+                ) : (
+                  <>
+                    {mode === 'signin' ? 'Sign in' : 'Create account'}
+                    <ArrowRight className="h-4 w-4" />
+                  </>
+                )}
+              </Button>
+            </form>
+          </div>
         </div>
       </div>
     </div>
