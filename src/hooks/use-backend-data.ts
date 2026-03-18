@@ -39,6 +39,18 @@ export function useApplicationsQuery() {
   });
 }
 
+export function useProfilesQuery(userIds: string[] = []) {
+  return useQuery({
+    queryKey: ["profiles", ...userIds],
+    enabled: userIds.length > 0,
+    queryFn: async () => {
+      const { data, error } = await supabase.from("profiles").select("*").in("user_id", userIds);
+      if (error) throw error;
+      return data ?? [];
+    },
+  });
+}
+
 export function useProjectsQuery() {
   return useQuery({
     queryKey: ["projects"],
@@ -55,6 +67,22 @@ export function useProposalsQuery() {
     queryKey: ["proposals"],
     queryFn: async () => {
       const { data, error } = await supabase.from("proposals").select("*").order("created_at", { ascending: false });
+      if (error) throw error;
+      return data ?? [];
+    },
+  });
+}
+
+export function useProposalRequirementsQuery(proposalIds: string[] = []) {
+  return useQuery({
+    queryKey: ["proposal-requirements", ...proposalIds],
+    enabled: proposalIds.length > 0,
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("proposal_requirements")
+        .select("*")
+        .in("proposal_id", proposalIds)
+        .order("created_at", { ascending: true });
       if (error) throw error;
       return data ?? [];
     },
