@@ -1,5 +1,5 @@
 // User roles and authentication
-export type UserRole = 'gvts_admin' | 'vgg_manager' | 'professional' | 'guest';
+export type UserRole = 'admin' | 'manager' | 'professional' | 'guest';
 
 export interface User {
   id: string;
