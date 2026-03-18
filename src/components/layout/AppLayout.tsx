@@ -12,23 +12,9 @@ import {
   Bell,
   ChevronDown,
   Loader2,
+  ShieldCheck,
 } from 'lucide-react';
-
-import { useAuth } from '@/contexts/AuthContext';
-import { getRoleLabel } from '@/lib/domain';
-import { Button } from '@/components/ui/button';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import { Badge } from '@/components/ui/badge';
-import { cn } from '@/lib/utils';
-
+...
 const navigation = [
   { name: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
   { name: 'Resources', href: '/resources', icon: Users },
@@ -36,6 +22,7 @@ const navigation = [
   { name: 'Opportunities', href: '/opportunities', icon: Briefcase },
   { name: 'Analytics', href: '/analytics', icon: BarChart3, managerOnly: true },
   { name: 'Reports', href: '/reports', icon: FileText, managerOnly: true },
+  { name: 'Workspace Setup', href: '/workspace', icon: ShieldCheck, managerOnly: true },
 ];
 
 export default function AppLayout() {

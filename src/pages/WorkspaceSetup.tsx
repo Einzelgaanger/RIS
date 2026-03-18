@@ -125,8 +125,14 @@ export default function WorkspaceSetup() {
   const pendingInvitations = useMemo(() => invitations.filter((invite) => invite.status === "pending"), [invitations]);
 
   const userMap = useMemo(() => new Map(users.map((entry) => [entry.userId, entry])), [users]);
-  const departmentMap = useMemo(() => new Map(departments.map((department) => [department.id, department])), [departments]);
-  const teamMap = useMemo(() => new Map(teams.map((team) => [team.id, team])), [teams]);
+  const departmentMap = useMemo<Map<string, (typeof departments)[number]>>(
+    () => new Map(departments.map((department) => [department.id, department] as const)),
+    [departments],
+  );
+  const teamMap = useMemo<Map<string, (typeof teams)[number]>>(
+    () => new Map(teams.map((team) => [team.id, team] as const)),
+    [teams],
+  );
   const managers = useMemo(() => users.filter((entry) => entry.role === "admin" || entry.role === "manager"), [users]);
 
   const enrichedMemberships = useMemo(
