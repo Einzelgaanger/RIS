@@ -14,6 +14,96 @@ export type Database = {
   }
   public: {
     Tables: {
+      departments: {
+        Row: {
+          created_at: string
+          created_by: string
+          description: string | null
+          id: string
+          name: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          created_by: string
+          description?: string | null
+          id?: string
+          name: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          created_by?: string
+          description?: string | null
+          id?: string
+          name?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      management_profiles: {
+        Row: {
+          bio: string | null
+          created_at: string
+          department_id: string | null
+          id: string
+          manager_user_id: string | null
+          office_location: string | null
+          onboarding_completed: boolean
+          phone: string | null
+          primary_team_id: string | null
+          responsibilities: string[]
+          title: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          bio?: string | null
+          created_at?: string
+          department_id?: string | null
+          id?: string
+          manager_user_id?: string | null
+          office_location?: string | null
+          onboarding_completed?: boolean
+          phone?: string | null
+          primary_team_id?: string | null
+          responsibilities?: string[]
+          title?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          bio?: string | null
+          created_at?: string
+          department_id?: string | null
+          id?: string
+          manager_user_id?: string | null
+          office_location?: string | null
+          onboarding_completed?: boolean
+          phone?: string | null
+          primary_team_id?: string | null
+          responsibilities?: string[]
+          title?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "management_profiles_department_id_fkey"
+            columns: ["department_id"]
+            isOneToOne: false
+            referencedRelation: "departments"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "management_profiles_primary_team_id_fkey"
+            columns: ["primary_team_id"]
+            isOneToOne: false
+            referencedRelation: "teams"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       opportunities: {
         Row: {
           client: string | null
@@ -398,6 +488,54 @@ export type Database = {
           },
         ]
       }
+      team_members: {
+        Row: {
+          created_by: string
+          department_id: string | null
+          id: string
+          is_team_lead: boolean
+          job_title: string | null
+          joined_at: string
+          team_id: string
+          user_id: string
+        }
+        Insert: {
+          created_by: string
+          department_id?: string | null
+          id?: string
+          is_team_lead?: boolean
+          job_title?: string | null
+          joined_at?: string
+          team_id: string
+          user_id: string
+        }
+        Update: {
+          created_by?: string
+          department_id?: string | null
+          id?: string
+          is_team_lead?: boolean
+          job_title?: string | null
+          joined_at?: string
+          team_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "team_members_department_id_fkey"
+            columns: ["department_id"]
+            isOneToOne: false
+            referencedRelation: "departments"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "team_members_team_id_fkey"
+            columns: ["team_id"]
+            isOneToOne: false
+            referencedRelation: "teams"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       team_selections: {
         Row: {
           builder_mode: string
@@ -465,6 +603,47 @@ export type Database = {
           },
         ]
       }
+      teams: {
+        Row: {
+          created_at: string
+          created_by: string
+          department_id: string | null
+          description: string | null
+          id: string
+          manager_user_id: string | null
+          name: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          created_by: string
+          department_id?: string | null
+          description?: string | null
+          id?: string
+          manager_user_id?: string | null
+          name: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          created_by?: string
+          department_id?: string | null
+          description?: string | null
+          id?: string
+          manager_user_id?: string | null
+          name?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "teams_department_id_fkey"
+            columns: ["department_id"]
+            isOneToOne: false
+            referencedRelation: "departments"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       user_roles: {
         Row: {
           created_at: string
@@ -486,12 +665,119 @@ export type Database = {
         }
         Relationships: []
       }
+      workspace_invitations: {
+        Row: {
+          accepted_at: string | null
+          accepted_user_id: string | null
+          created_at: string
+          department_id: string | null
+          email: string
+          expires_at: string
+          full_name: string | null
+          id: string
+          invite_token: string
+          invited_by: string
+          note: string | null
+          organization: string | null
+          role: Database["public"]["Enums"]["app_role"]
+          status: Database["public"]["Enums"]["invitation_status"]
+          team_id: string | null
+          title: string | null
+          updated_at: string
+        }
+        Insert: {
+          accepted_at?: string | null
+          accepted_user_id?: string | null
+          created_at?: string
+          department_id?: string | null
+          email: string
+          expires_at?: string
+          full_name?: string | null
+          id?: string
+          invite_token?: string
+          invited_by: string
+          note?: string | null
+          organization?: string | null
+          role: Database["public"]["Enums"]["app_role"]
+          status?: Database["public"]["Enums"]["invitation_status"]
+          team_id?: string | null
+          title?: string | null
+          updated_at?: string
+        }
+        Update: {
+          accepted_at?: string | null
+          accepted_user_id?: string | null
+          created_at?: string
+          department_id?: string | null
+          email?: string
+          expires_at?: string
+          full_name?: string | null
+          id?: string
+          invite_token?: string
+          invited_by?: string
+          note?: string | null
+          organization?: string | null
+          role?: Database["public"]["Enums"]["app_role"]
+          status?: Database["public"]["Enums"]["invitation_status"]
+          team_id?: string | null
+          title?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "workspace_invitations_department_id_fkey"
+            columns: ["department_id"]
+            isOneToOne: false
+            referencedRelation: "departments"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "workspace_invitations_team_id_fkey"
+            columns: ["team_id"]
+            isOneToOne: false
+            referencedRelation: "teams"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
       bootstrap_first_admin: { Args: never; Returns: boolean }
+      claim_pending_invitation: {
+        Args: never
+        Returns: {
+          accepted_at: string | null
+          accepted_user_id: string | null
+          created_at: string
+          department_id: string | null
+          email: string
+          expires_at: string
+          full_name: string | null
+          id: string
+          invite_token: string
+          invited_by: string
+          note: string | null
+          organization: string | null
+          role: Database["public"]["Enums"]["app_role"]
+          status: Database["public"]["Enums"]["invitation_status"]
+          team_id: string | null
+          title: string | null
+          updated_at: string
+        }
+        SetofOptions: {
+          from: "*"
+          to: "workspace_invitations"
+          isOneToOne: true
+          isSetofReturn: false
+        }
+      }
+      ensure_management_profile: {
+        Args: { target_user_id: string }
+        Returns: undefined
+      }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
@@ -520,6 +806,7 @@ export type Database = {
     }
     Enums: {
       app_role: "admin" | "manager" | "professional"
+      invitation_status: "pending" | "accepted" | "revoked" | "expired"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -648,6 +935,7 @@ export const Constants = {
   public: {
     Enums: {
       app_role: ["admin", "manager", "professional"],
+      invitation_status: ["pending", "accepted", "revoked", "expired"],
     },
   },
 } as const

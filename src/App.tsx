@@ -14,6 +14,7 @@ import TeamBuilder from "@/pages/TeamBuilder";
 import Opportunities from "@/pages/Opportunities";
 import Analytics from "@/pages/Analytics";
 import Reports from "@/pages/Reports";
+import WorkspaceSetup from "@/pages/WorkspaceSetup";
 import NotFound from "@/pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -36,6 +37,7 @@ const App = () => (
               <Route path="opportunities" element={<Opportunities />} />
               <Route path="analytics" element={<Analytics />} />
               <Route path="reports" element={<Reports />} />
+              <Route path="workspace" element={<WorkspaceSetup />} />
             </Route>
             <Route path="*" element={<NotFound />} />
           </Routes>

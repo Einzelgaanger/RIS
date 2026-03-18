@@ -10,6 +10,75 @@ export interface User {
   avatar?: string;
 }
 
+export interface Department {
+  id: string;
+  name: string;
+  description?: string;
+  createdBy: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface Team {
+  id: string;
+  departmentId?: string;
+  name: string;
+  description?: string;
+  managerUserId?: string;
+  createdBy: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface ManagementProfile {
+  id: string;
+  userId: string;
+  title?: string;
+  phone?: string;
+  officeLocation?: string;
+  bio?: string;
+  responsibilities: string[];
+  departmentId?: string;
+  primaryTeamId?: string;
+  managerUserId?: string;
+  onboardingCompleted: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface TeamMembership {
+  id: string;
+  teamId: string;
+  userId: string;
+  departmentId?: string;
+  jobTitle?: string;
+  isTeamLead: boolean;
+  joinedAt: string;
+  createdBy: string;
+}
+
+export type InvitationStatus = 'pending' | 'accepted' | 'revoked' | 'expired';
+
+export interface WorkspaceInvitation {
+  id: string;
+  email: string;
+  fullName?: string;
+  role: Exclude<UserRole, 'guest'>;
+  title?: string;
+  organization?: string;
+  departmentId?: string;
+  teamId?: string;
+  invitedBy: string;
+  status: InvitationStatus;
+  inviteToken: string;
+  expiresAt: string;
+  acceptedAt?: string;
+  acceptedUserId?: string;
+  note?: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
 // Tier classification
 export type Tier = 1 | 2 | 3 | 4;
 
