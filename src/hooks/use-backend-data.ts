@@ -127,10 +127,10 @@ export function useUserDirectoryQuery() {
       if (profilesError) throw profilesError;
       if (rolesError) throw rolesError;
 
-      const roleMap = new Map<string, { role: UserRole }[]>();
+      const roleMap = new Map<string, { role: "admin" | "manager" | "professional" }[]>();
       (roles ?? []).forEach((roleRow) => {
         const existing = roleMap.get(roleRow.user_id) ?? [];
-        existing.push({ role: roleRow.role as UserRole });
+        existing.push({ role: roleRow.role });
         roleMap.set(roleRow.user_id, existing);
       });
 

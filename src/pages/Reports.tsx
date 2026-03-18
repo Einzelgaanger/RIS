@@ -17,7 +17,7 @@ import type { UserRole } from "@/types";
 
 function csvEscape(value: unknown) {
   const stringValue = String(value ?? "");
-  return `"${stringValue.replaceAll('"', '""')}"`;
+  return `"${stringValue.replace(/"/g, '""')}"`;
 }
 
 function downloadCsv(filename: string, rows: Record<string, unknown>[]) {
