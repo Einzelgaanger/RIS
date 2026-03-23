@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Navigate } from 'react-router-dom';
-import { ArrowRight, Eye, EyeOff, Loader2, Mail, Shield, Sparkles } from 'lucide-react';
+import { ArrowRight, Eye, EyeOff, Loader2, Mail, Shield, Sparkles, Chrome } from 'lucide-react';
 
 import { useAuth } from '@/contexts/AuthContext';
 import { Alert, AlertDescription } from '@/components/ui/alert';
