@@ -726,11 +726,12 @@ export default function WorkspaceSetup() {
               <Table>
                 <TableHeader>
                   <TableRow>
-                    <TableHead>Member</TableHead>
-                    <TableHead>Team</TableHead>
-                    <TableHead>Department</TableHead>
-                    <TableHead>Role in team</TableHead>
-                    <TableHead>Joined</TableHead>
+                     <TableHead>Member</TableHead>
+                     <TableHead>Team</TableHead>
+                     <TableHead>Department</TableHead>
+                     <TableHead>Role in team</TableHead>
+                     <TableHead>Joined</TableHead>
+                     {(isAdmin || isManager) && <TableHead className="text-right">Action</TableHead>}
                   </TableRow>
                 </TableHeader>
                 <TableBody>
