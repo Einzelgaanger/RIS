@@ -80,6 +80,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     try {
       await supabase.rpc("bootstrap_first_admin");
       await (supabase as any).rpc("claim_pending_invitation");
+      await (supabase as any).rpc("ensure_default_role");
 
       const profile = await ensureOwnProfile(nextSession);
       const { data: roles, error: rolesError } = await supabase
