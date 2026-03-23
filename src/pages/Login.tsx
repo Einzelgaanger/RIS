@@ -92,7 +92,7 @@ export default function Login() {
           <div className="max-w-xl space-y-8">
             <div>
               <h1 className="font-display text-5xl font-bold leading-tight xl:text-6xl">
-                Secure access to your <span className="text-secondary-foreground">live talent system</span>
+                Secure access to your <span className="text-primary-foreground/90">live talent system</span>
               </h1>
               <p className="mt-4 text-lg leading-relaxed text-primary-foreground/85">
                 Sign in with Google or email/password to manage resources, opportunities, and proposal teams with real backend data.
