@@ -774,6 +774,7 @@ export type Database = {
           isSetofReturn: false
         }
       }
+      ensure_default_role: { Args: never; Returns: undefined }
       ensure_management_profile: {
         Args: { target_user_id: string }
         Returns: undefined

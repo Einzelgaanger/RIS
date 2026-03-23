@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { Navigate } from "react-router-dom";
 import { useQueryClient } from "@tanstack/react-query";
-import { Building2, MailPlus, ShieldCheck, UserCog, Users2 } from "lucide-react";
+import { Building2, MailPlus, ShieldCheck, Trash2, UserCog, Users2 } from "lucide-react";
 
 import { useAuth } from "@/contexts/AuthContext";
 import {
@@ -298,6 +298,20 @@ export default function WorkspaceSetup() {
     setMembershipLead("no");
     await invalidateWorkspace();
     toast({ title: "Member assigned", description: "The team structure has been updated." });
+  };
+
+  const handleRemoveTeamMember = async (membershipId: string) => {
+    setSavingSection(membershipId);
+    const { error } = await backend.from("team_members").delete().eq("id", membershipId);
+    setSavingSection(null);
+
+    if (error) {
+      toast({ title: "Could not remove member", description: error.message, variant: "destructive" });
+      return;
+    }
+
+    await invalidateWorkspace();
+    toast({ title: "Member removed", description: "Team assignment has been removed." });
   };
 
   const handleSendInvitation = async () => {
@@ -712,17 +726,18 @@ export default function WorkspaceSetup() {
               <Table>
                 <TableHeader>
                   <TableRow>
-                    <TableHead>Member</TableHead>
-                    <TableHead>Team</TableHead>
-                    <TableHead>Department</TableHead>
-                    <TableHead>Role in team</TableHead>
-                    <TableHead>Joined</TableHead>
+                     <TableHead>Member</TableHead>
+                     <TableHead>Team</TableHead>
+                     <TableHead>Department</TableHead>
+                     <TableHead>Role in team</TableHead>
+                     <TableHead>Joined</TableHead>
+                     {(isAdmin || isManager) && <TableHead className="text-right">Action</TableHead>}
                   </TableRow>
                 </TableHeader>
                 <TableBody>
                   {enrichedMemberships.length === 0 ? (
                     <TableRow>
-                      <TableCell colSpan={5} className="text-center text-muted-foreground">
+                       <TableCell colSpan={6} className="text-center text-muted-foreground">
                         No team assignments yet.
                       </TableCell>
                     </TableRow>
@@ -732,8 +747,21 @@ export default function WorkspaceSetup() {
                         <TableCell className="font-medium">{membership.userName}</TableCell>
                         <TableCell>{membership.teamName}</TableCell>
                         <TableCell>{membership.departmentName}</TableCell>
-                        <TableCell>{membership.isTeamLead ? `${membership.jobTitle || "Lead"} · Team lead` : membership.jobTitle || "Member"}</TableCell>
-                        <TableCell>{formatDate(membership.joinedAt)}</TableCell>
+                         <TableCell>{membership.isTeamLead ? `${membership.jobTitle || "Lead"} · Team lead` : membership.jobTitle || "Member"}</TableCell>
+                         <TableCell>{formatDate(membership.joinedAt)}</TableCell>
+                         {(isAdmin || isManager) && (
+                           <TableCell className="text-right">
+                             <Button
+                               variant="ghost"
+                               size="icon"
+                               className="h-8 w-8 text-destructive hover:text-destructive"
+                               onClick={() => void handleRemoveTeamMember(membership.id)}
+                               disabled={savingSection === membership.id}
+                             >
+                               <Trash2 className="h-4 w-4" />
+                             </Button>
+                           </TableCell>
+                         )}
                       </TableRow>
                     ))
                   )}
