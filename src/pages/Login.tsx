@@ -100,15 +100,15 @@ export default function Login() {
             </div>
 
             <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
-              <div className="rounded-xl bg-card/15 p-4 backdrop-blur-sm">
+              <div className="rounded-xl border border-primary-foreground/15 bg-primary-foreground/10 p-4 backdrop-blur-sm">
                 <Shield className="mb-3 h-5 w-5" />
                 <p className="text-sm font-medium">Role-based access</p>
               </div>
-              <div className="rounded-xl bg-card/15 p-4 backdrop-blur-sm">
+              <div className="rounded-xl border border-primary-foreground/15 bg-primary-foreground/10 p-4 backdrop-blur-sm">
                 <Sparkles className="mb-3 h-5 w-5" />
                 <p className="text-sm font-medium">Live team planning</p>
               </div>
-              <div className="rounded-xl bg-card/15 p-4 backdrop-blur-sm">
+              <div className="rounded-xl border border-primary-foreground/15 bg-primary-foreground/10 p-4 backdrop-blur-sm">
                 <Mail className="mb-3 h-5 w-5" />
                 <p className="text-sm font-medium">Verified accounts</p>
               </div>
