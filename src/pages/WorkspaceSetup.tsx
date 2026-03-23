@@ -747,8 +747,21 @@ export default function WorkspaceSetup() {
                         <TableCell className="font-medium">{membership.userName}</TableCell>
                         <TableCell>{membership.teamName}</TableCell>
                         <TableCell>{membership.departmentName}</TableCell>
-                        <TableCell>{membership.isTeamLead ? `${membership.jobTitle || "Lead"} · Team lead` : membership.jobTitle || "Member"}</TableCell>
-                        <TableCell>{formatDate(membership.joinedAt)}</TableCell>
+                         <TableCell>{membership.isTeamLead ? `${membership.jobTitle || "Lead"} · Team lead` : membership.jobTitle || "Member"}</TableCell>
+                         <TableCell>{formatDate(membership.joinedAt)}</TableCell>
+                         {(isAdmin || isManager) && (
+                           <TableCell className="text-right">
+                             <Button
+                               variant="ghost"
+                               size="icon"
+                               className="h-8 w-8 text-destructive hover:text-destructive"
+                               onClick={() => void handleRemoveTeamMember(membership.id)}
+                               disabled={savingSection === membership.id}
+                             >
+                               <Trash2 className="h-4 w-4" />
+                             </Button>
+                           </TableCell>
+                         )}
                       </TableRow>
                     ))
                   )}
