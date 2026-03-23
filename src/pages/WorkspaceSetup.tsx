@@ -300,6 +300,20 @@ export default function WorkspaceSetup() {
     toast({ title: "Member assigned", description: "The team structure has been updated." });
   };
 
+  const handleRemoveTeamMember = async (membershipId: string) => {
+    setSavingSection(membershipId);
+    const { error } = await backend.from("team_members").delete().eq("id", membershipId);
+    setSavingSection(null);
+
+    if (error) {
+      toast({ title: "Could not remove member", description: error.message, variant: "destructive" });
+      return;
+    }
+
+    await invalidateWorkspace();
+    toast({ title: "Member removed", description: "Team assignment has been removed." });
+  };
+
   const handleSendInvitation = async () => {
     if (!user || !inviteEmail.trim()) return;
     setSavingSection("invite");
