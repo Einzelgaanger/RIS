@@ -82,7 +82,7 @@ export default function Login() {
     <div className="flex min-h-screen overflow-hidden bg-background">
       <div className="relative hidden lg:flex lg:w-1/2 xl:w-3/5">
         <img src={authHeroImage} alt="GVTS Resource Intelligence Platform" className="absolute inset-0 h-full w-full object-cover" />
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/60 via-primary/35 to-background/10" />
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/70 via-primary/40 to-transparent" />
         <div className="relative z-10 flex flex-col justify-between p-12 text-primary-foreground">
           <div>
             <p className="font-display text-2xl font-bold">GVTS RIP</p>
