@@ -30,10 +30,10 @@ const App = () => (
           <Sonner />
           <BrowserRouter>
             <Routes>
+              <Route path="/" element={<Index />} />
               <Route path="/login" element={<Login />} />
               <Route path="/reset-password" element={<ResetPassword />} />
-              <Route path="/" element={<AppLayout />}>
-              <Route index element={<Navigate to="/dashboard" replace />} />
+              <Route element={<AppLayout />}>
 
                 <Route path="dashboard" element={<Dashboard />} />
                 <Route path="resources" element={<Resources />} />
