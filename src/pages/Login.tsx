@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Navigate } from 'react-router-dom';
-import { ArrowRight, Eye, EyeOff, Loader2, Mail, Shield, Sparkles } from 'lucide-react';
+import { ArrowRight, Eye, EyeOff, Loader2, Mail, Shield, Sparkles, Chrome } from 'lucide-react';
 
 import { useAuth } from '@/contexts/AuthContext';
 import { Alert, AlertDescription } from '@/components/ui/alert';
@@ -82,7 +82,7 @@ export default function Login() {
     <div className="flex min-h-screen overflow-hidden bg-background">
       <div className="relative hidden lg:flex lg:w-1/2 xl:w-3/5">
         <img src={authHeroImage} alt="GVTS Resource Intelligence Platform" className="absolute inset-0 h-full w-full object-cover" />
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/60 via-primary/35 to-background/10" />
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/70 via-primary/40 to-transparent" />
         <div className="relative z-10 flex flex-col justify-between p-12 text-primary-foreground">
           <div>
             <p className="font-display text-2xl font-bold">GVTS RIP</p>
@@ -92,7 +92,7 @@ export default function Login() {
           <div className="max-w-xl space-y-8">
             <div>
               <h1 className="font-display text-5xl font-bold leading-tight xl:text-6xl">
-                Secure access to your <span className="text-secondary-foreground">live talent system</span>
+                Secure access to your <span className="text-primary-foreground/90">live talent system</span>
               </h1>
               <p className="mt-4 text-lg leading-relaxed text-primary-foreground/85">
                 Sign in with Google or email/password to manage resources, opportunities, and proposal teams with real backend data.
@@ -100,15 +100,15 @@ export default function Login() {
             </div>
 
             <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
-              <div className="rounded-xl bg-card/15 p-4 backdrop-blur-sm">
+              <div className="rounded-xl border border-primary-foreground/15 bg-primary-foreground/10 p-4 backdrop-blur-sm">
                 <Shield className="mb-3 h-5 w-5" />
                 <p className="text-sm font-medium">Role-based access</p>
               </div>
-              <div className="rounded-xl bg-card/15 p-4 backdrop-blur-sm">
+              <div className="rounded-xl border border-primary-foreground/15 bg-primary-foreground/10 p-4 backdrop-blur-sm">
                 <Sparkles className="mb-3 h-5 w-5" />
                 <p className="text-sm font-medium">Live team planning</p>
               </div>
-              <div className="rounded-xl bg-card/15 p-4 backdrop-blur-sm">
+              <div className="rounded-xl border border-primary-foreground/15 bg-primary-foreground/10 p-4 backdrop-blur-sm">
                 <Mail className="mb-3 h-5 w-5" />
                 <p className="text-sm font-medium">Verified accounts</p>
               </div>
