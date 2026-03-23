@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { Navigate } from "react-router-dom";
 import { useQueryClient } from "@tanstack/react-query";
-import { Building2, MailPlus, ShieldCheck, UserCog, Users2 } from "lucide-react";
+import { Building2, MailPlus, ShieldCheck, Trash2, UserCog, Users2 } from "lucide-react";
 
 import { useAuth } from "@/contexts/AuthContext";
 import {
