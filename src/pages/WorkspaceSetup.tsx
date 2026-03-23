@@ -737,7 +737,7 @@ export default function WorkspaceSetup() {
                 <TableBody>
                   {enrichedMemberships.length === 0 ? (
                     <TableRow>
-                      <TableCell colSpan={5} className="text-center text-muted-foreground">
+                       <TableCell colSpan={6} className="text-center text-muted-foreground">
                         No team assignments yet.
                       </TableCell>
                     </TableRow>
