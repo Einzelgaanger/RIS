@@ -134,6 +134,9 @@ export default function Login() {
 
       <div className="flex flex-1 items-center justify-center px-6 py-10 lg:px-10 xl:px-16">
         <div className="w-full max-w-md">
+          <Button asChild variant="ghost" size="sm" className="mb-6 gap-1.5 text-muted-foreground hover:text-foreground">
+            <Link to="/"><ArrowLeft className="h-4 w-4" /> Back to Home</Link>
+          </Button>
           <div className="mb-8 lg:hidden">
             <p className="font-display text-xl font-bold">GVTS RIP</p>
             <p className="text-sm text-muted-foreground">Production workspace sign-in</p>
