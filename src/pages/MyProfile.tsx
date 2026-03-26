@@ -129,24 +129,13 @@ export default function MyProfile() {
         proficiency: s.proficiency,
         yearsExperience: s.yearsExperience,
         validated: s.validated,
-      }));
+      })) as unknown as Record<string, unknown>[];
 
-    const cleanCerts = certifications.filter((c) => c.name.trim());
+    const cleanCerts = certifications
+      .filter((c) => c.name.trim())
+      .map((c) => ({ name: c.name, issuer: c.issuer, year: c.year })) as unknown as Record<string, unknown>[];
 
-    // Get profile id
-    const { data: profile } = await supabase
-      .from("profiles")
-      .select("id")
-      .eq("user_id", user.id)
-      .single();
-
-    if (!profile) {
-      setIsSaving(false);
-      toast({ title: "Profile not found", variant: "destructive" });
-      return;
-    }
-
-    const resourceData = {
+    const resourceData: any = {
       full_name: user.fullName,
       email: user.email,
       title: title || null,
