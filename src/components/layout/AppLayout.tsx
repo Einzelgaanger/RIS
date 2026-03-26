@@ -12,12 +12,14 @@ import {
   ChevronDown,
   Loader2,
   ShieldCheck,
+  UserCircle,
   X,
 } from 'lucide-react';
 
 import { useAuth } from '@/contexts/AuthContext';
 import { getRoleLabel } from '@/lib/domain';
 import { ThemeToggle } from '@/components/ThemeToggle';
+import NotificationCenter from '@/components/notifications/NotificationCenter';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import {
@@ -36,6 +38,7 @@ const navigation = [
   { name: 'Resources', href: '/resources', icon: Users },
   { name: 'Team Builder', href: '/team-builder', icon: Target },
   { name: 'Opportunities', href: '/opportunities', icon: Briefcase },
+  { name: 'My Profile', href: '/profile', icon: UserCircle, professionalOnly: true },
   { name: 'Analytics', href: '/analytics', icon: BarChart3, managerOnly: true },
   { name: 'Reports', href: '/reports', icon: FileText, managerOnly: true },
   { name: 'Workspace', href: '/workspace', icon: ShieldCheck, managerOnly: true },

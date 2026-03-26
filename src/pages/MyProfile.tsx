@@ -103,7 +103,7 @@ export default function MyProfile() {
   );
 
   const teamMap = useMemo(
-    () => new Map(teams.map((t) => [t.id, t])),
+    () => new Map(teams.map((t) => [t.id, t] as const)),
     [teams],
   );
 
