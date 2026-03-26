@@ -439,12 +439,12 @@ export default function WorkspaceSetup() {
       </div>
 
       <Tabs defaultValue="overview" className="space-y-4">
-        <TabsList className="w-full justify-start overflow-x-auto">
-          <TabsTrigger value="overview">Overview</TabsTrigger>
-          <TabsTrigger value="profile">Profile</TabsTrigger>
-          <TabsTrigger value="structure">Teams</TabsTrigger>
-          <TabsTrigger value="invites">Invites</TabsTrigger>
-          {isAdmin && <TabsTrigger value="access">Roles</TabsTrigger>}
+        <TabsList className="flex w-full overflow-x-auto">
+          <TabsTrigger value="overview" className="flex-shrink-0">Overview</TabsTrigger>
+          <TabsTrigger value="profile" className="flex-shrink-0">Profile</TabsTrigger>
+          <TabsTrigger value="structure" className="flex-shrink-0">Teams</TabsTrigger>
+          <TabsTrigger value="invites" className="flex-shrink-0">Invites</TabsTrigger>
+          {isAdmin && <TabsTrigger value="access" className="flex-shrink-0">Roles</TabsTrigger>}
         </TabsList>
 
         <TabsContent value="overview" className="space-y-4">
