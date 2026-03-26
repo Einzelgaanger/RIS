@@ -15,7 +15,7 @@ import { useAuth } from '@/contexts/AuthContext';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import heroImage from '@/assets/hero-team.jpg';
 import patternBg from '@/assets/pattern-bg.jpg';
-import faviconLogo from '/favicon.png';
+import vggLogo from '@/assets/vgg-logo.webp';
 
 const features = [
   {
@@ -76,13 +76,10 @@ export default function Index() {
       <nav className="sticky top-0 z-50 border-b border-border/60 bg-background/80 backdrop-blur-xl">
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
           <Link to="/" className="flex items-center gap-2.5">
-            <img src={faviconLogo} alt="GVTS" className="h-8 w-8" />
-            <div className="flex flex-col leading-tight">
-              <span className="font-display text-lg font-bold tracking-tight">GVTS RIP</span>
-              <span className="hidden text-[10px] font-medium uppercase tracking-widest text-muted-foreground sm:block">
-                Resource Intelligence
-              </span>
-            </div>
+            <img src={vggLogo} alt="Venture Garden Group" className="h-8" />
+            <span className="hidden text-[10px] font-semibold uppercase tracking-widest text-muted-foreground sm:block">
+              Resource Intelligence Platform
+            </span>
           </Link>
 
           <div className="flex items-center gap-2">
@@ -225,10 +222,10 @@ export default function Index() {
       <footer className="border-t border-border/60 bg-card py-10">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-4 sm:flex-row sm:px-6 lg:px-8">
           <div className="flex items-center gap-2">
-            <img src={faviconLogo} alt="GVTS" className="h-6 w-6" loading="lazy" />
-            <span className="font-display text-sm font-bold">GVTS Resource Intelligence Platform</span>
+            <img src={vggLogo} alt="Venture Garden Group" className="h-6" loading="lazy" />
+            <span className="font-display text-sm font-bold">Resource Intelligence Platform</span>
           </div>
-          <p className="text-xs text-muted-foreground">&copy; {new Date().getFullYear()} GVTS. All rights reserved.</p>
+          <p className="text-xs text-muted-foreground">&copy; {new Date().getFullYear()} Venture Garden Group. All rights reserved.</p>
         </div>
       </footer>
     </div>

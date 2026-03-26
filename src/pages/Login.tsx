@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import authHeroImage from '@/assets/auth-hero.jpg';
+import vggLogo from '@/assets/vgg-logo.webp';
 
 export default function Login() {
   const { login, signUp, signInWithGoogle, requestPasswordReset, isAuthenticated, isLoading } = useAuth();
@@ -85,8 +86,8 @@ export default function Login() {
         <div className="absolute inset-0 bg-gradient-to-br from-primary/70 via-primary/40 to-transparent" />
         <div className="relative z-10 flex flex-col justify-between p-12 text-primary-foreground">
           <div>
-            <p className="font-display text-2xl font-bold">GVTS RIP</p>
-            <p className="text-sm text-primary-foreground/80">Production access for teams, managers, and delivery leads</p>
+            <img src={vggLogo} alt="Venture Garden Group" className="h-8 brightness-0 invert" />
+            <p className="mt-1 text-sm text-primary-foreground/80">Resource Intelligence Platform</p>
           </div>
 
           <div className="max-w-xl space-y-8">
@@ -138,8 +139,8 @@ export default function Login() {
             <Link to="/"><ArrowLeft className="h-4 w-4" /> Back to Home</Link>
           </Button>
           <div className="mb-8 lg:hidden">
-            <p className="font-display text-xl font-bold">GVTS RIP</p>
-            <p className="text-sm text-muted-foreground">Production workspace sign-in</p>
+            <img src={vggLogo} alt="Venture Garden Group" className="h-7 mb-1" />
+            <p className="text-sm text-muted-foreground">Resource Intelligence Platform</p>
           </div>
 
           <div className="mb-8">

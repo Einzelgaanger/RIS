@@ -8,106 +8,106 @@
 
 @layer base {
   :root {
-    /* Core brand colors - GVTS Blue */
-    --background: 210 15% 97%;
-    --foreground: 215 30% 12%;
+    /* Core brand colors - VGG Green & Blue */
+    --background: 140 10% 97%;
+    --foreground: 160 25% 10%;
 
     --card: 0 0% 100%;
-    --card-foreground: 215 30% 12%;
+    --card-foreground: 160 25% 10%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 215 30% 12%;
+    --popover-foreground: 160 25% 10%;
 
-    /* Primary - Deep Professional Blue */
-    --primary: 210 100% 35%;
+    /* Primary - VGG Green */
+    --primary: 100 50% 42%;
     --primary-foreground: 0 0% 100%;
 
-    /* Secondary - Slate Blue */
-    --secondary: 215 20% 25%;
-    --secondary-foreground: 210 15% 95%;
+    /* Secondary - VGG Blue */
+    --secondary: 205 100% 37%;
+    --secondary-foreground: 0 0% 100%;
 
-    --muted: 210 12% 90%;
-    --muted-foreground: 215 20% 35%;
+    --muted: 140 8% 90%;
+    --muted-foreground: 160 15% 35%;
 
-    --accent: 210 25% 92%;
-    --accent-foreground: 210 100% 30%;
+    --accent: 140 18% 92%;
+    --accent-foreground: 100 50% 35%;
 
-    /* Status colors - Deeper */
+    /* Status colors */
     --destructive: 0 80% 50%;
     --destructive-foreground: 0 0% 100%;
 
-    --success: 160 90% 32%;
+    --success: 100 50% 42%;
     --success-foreground: 0 0% 100%;
 
     --warning: 38 95% 45%;
     --warning-foreground: 0 0% 100%;
 
-    --border: 214 18% 82%;
-    --input: 214 18% 82%;
-    --ring: 210 100% 35%;
+    --border: 140 12% 82%;
+    --input: 140 12% 82%;
+    --ring: 100 50% 42%;
 
     --radius: 0.5rem;
 
-    /* Tier colors - Deeper */
+    /* Tier colors */
     --tier-1: 45 95% 42%;
     --tier-2: 0 0% 55%;
     --tier-3: 30 55% 42%;
-    --tier-4: 210 12% 50%;
+    --tier-4: 140 10% 50%;
 
-    /* Sidebar */
-    --sidebar-background: 215 30% 12%;
-    --sidebar-foreground: 210 15% 92%;
-    --sidebar-primary: 210 100% 50%;
+    /* Sidebar - Dark with VGG branding */
+    --sidebar-background: 160 30% 10%;
+    --sidebar-foreground: 140 10% 92%;
+    --sidebar-primary: 100 55% 50%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 215 28% 18%;
-    --sidebar-accent-foreground: 210 15% 92%;
-    --sidebar-border: 215 25% 22%;
-    --sidebar-ring: 210 100% 50%;
+    --sidebar-accent: 160 25% 16%;
+    --sidebar-accent-foreground: 140 10% 92%;
+    --sidebar-border: 160 20% 18%;
+    --sidebar-ring: 100 55% 50%;
   }
 
   .dark {
-    --background: 215 30% 8%;
-    --foreground: 210 15% 95%;
+    --background: 160 20% 7%;
+    --foreground: 140 10% 95%;
 
-    --card: 215 28% 11%;
-    --card-foreground: 210 15% 95%;
+    --card: 160 22% 10%;
+    --card-foreground: 140 10% 95%;
 
-    --popover: 215 28% 11%;
-    --popover-foreground: 210 15% 95%;
+    --popover: 160 22% 10%;
+    --popover-foreground: 140 10% 95%;
 
-    --primary: 210 100% 50%;
+    --primary: 100 55% 48%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 215 20% 20%;
-    --secondary-foreground: 210 15% 95%;
+    --secondary: 205 80% 45%;
+    --secondary-foreground: 0 0% 100%;
 
-    --muted: 215 22% 16%;
-    --muted-foreground: 215 12% 55%;
+    --muted: 160 18% 15%;
+    --muted-foreground: 140 8% 55%;
 
-    --accent: 215 25% 16%;
-    --accent-foreground: 210 100% 60%;
+    --accent: 160 20% 14%;
+    --accent-foreground: 100 55% 55%;
 
     --destructive: 0 75% 50%;
     --destructive-foreground: 0 0% 100%;
 
-    --success: 160 90% 35%;
+    --success: 100 55% 40%;
     --success-foreground: 0 0% 100%;
 
     --warning: 38 95% 48%;
     --warning-foreground: 0 0% 100%;
 
-    --border: 215 22% 18%;
-    --input: 215 22% 18%;
-    --ring: 210 100% 50%;
+    --border: 160 18% 16%;
+    --input: 160 18% 16%;
+    --ring: 100 55% 48%;
 
-    --sidebar-background: 215 32% 7%;
-    --sidebar-foreground: 210 15% 92%;
-    --sidebar-primary: 210 100% 50%;
+    --sidebar-background: 160 30% 6%;
+    --sidebar-foreground: 140 10% 92%;
+    --sidebar-primary: 100 55% 50%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 215 28% 14%;
-    --sidebar-accent-foreground: 210 15% 92%;
-    --sidebar-border: 215 22% 14%;
-    --sidebar-ring: 210 100% 50%;
+    --sidebar-accent: 160 22% 12%;
+    --sidebar-accent-foreground: 140 10% 92%;
+    --sidebar-border: 160 18% 12%;
+    --sidebar-ring: 100 55% 50%;
   }
 }
 
