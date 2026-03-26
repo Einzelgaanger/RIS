@@ -102,8 +102,8 @@ export default function MyProfile() {
     [teamMembers, user?.id],
   );
 
-  const teamMap = useMemo(
-    () => new Map(teams.map((t) => [t.id, t] as const)),
+  const teamMap = useMemo<Map<string, { id: string; name: string }>>(
+    () => new Map(teams.map((t) => [t.id, t])),
     [teams],
   );
 

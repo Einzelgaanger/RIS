@@ -50,8 +50,12 @@ export default function AppLayout() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const filteredNav = useMemo(
-    () => navigation.filter((item) => !item.managerOnly || canViewAnalytics()),
-    [canViewAnalytics],
+    () => navigation.filter((item) => {
+      if (item.managerOnly && !canViewAnalytics()) return false;
+      if ((item as any).professionalOnly && (user?.role === 'admin' || user?.role === 'manager')) return false;
+      return true;
+    }),
+    [canViewAnalytics, user?.role],
   );
 
   if (isLoading) {
