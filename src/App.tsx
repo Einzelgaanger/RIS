@@ -18,6 +18,7 @@ import Analytics from "@/pages/Analytics";
 import Reports from "@/pages/Reports";
 import WorkspaceSetup from "@/pages/WorkspaceSetup";
 import NotFound from "@/pages/NotFound";
+import Unsubscribe from "@/pages/Unsubscribe";
 
 const queryClient = new QueryClient();
 
@@ -33,6 +34,7 @@ const App = () => (
               <Route path="/" element={<Index />} />
               <Route path="/login" element={<Login />} />
               <Route path="/reset-password" element={<ResetPassword />} />
+              <Route path="/unsubscribe" element={<Unsubscribe />} />
               <Route element={<AppLayout />}>
 
                 <Route path="dashboard" element={<Dashboard />} />
