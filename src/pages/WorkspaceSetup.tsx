@@ -317,7 +317,7 @@ export default function WorkspaceSetup() {
   const handleSendInvitation = async () => {
     if (!user || !inviteEmail.trim()) return;
     setSavingSection("invite");
-    const { error } = await backend.from("workspace_invitations").insert({
+    const { data: invitation, error } = await backend.from("workspace_invitations").insert({
       email: inviteEmail.trim().toLowerCase(),
       full_name: inviteFullName.trim() || null,
       role: isAdmin ? inviteRole : "professional",
@@ -327,13 +327,35 @@ export default function WorkspaceSetup() {
       team_id: optionalValue(inviteTeamId),
       note: inviteNote.trim() || null,
       invited_by: user.id,
-    });
+    }).select("id").single();
     setSavingSection(null);
 
     if (error) {
       toast({ title: "Invitation not saved", description: error.message, variant: "destructive" });
       return;
     }
+
+    // Send invitation email via transactional email
+    const selectedTeam = inviteTeamId !== "none" ? teams.find((t) => t.id === inviteTeamId) : undefined;
+    const selectedDept = inviteDepartmentId !== "none" ? departments.find((d) => d.id === inviteDepartmentId) : undefined;
+    const roleName = getRoleLabel(isAdmin ? inviteRole : "professional");
+
+    supabase.functions.invoke("send-transactional-email", {
+      body: {
+        templateName: "workspace-invitation",
+        recipientEmail: inviteEmail.trim().toLowerCase(),
+        idempotencyKey: `workspace-invite-${invitation.id}`,
+        templateData: {
+          inviteeName: inviteFullName.trim() || undefined,
+          roleName,
+          teamName: selectedTeam?.name || undefined,
+          departmentName: selectedDept?.name || undefined,
+          inviterName: user.fullName,
+          note: inviteNote.trim() || undefined,
+          signupUrl: "https://ris.vgg.app/login",
+        },
+      },
+    }).catch((err) => console.error("Failed to send invite email:", err));
 
     setInviteEmail("");
     setInviteFullName("");
@@ -344,7 +366,7 @@ export default function WorkspaceSetup() {
     setInviteNote("");
     setInviteRole(isAdmin ? "manager" : "professional");
     await invalidateWorkspace();
-    toast({ title: "Invitation created", description: "The person can sign up with this email and the role/team will be claimed automatically." });
+    toast({ title: "Invitation sent", description: "An invitation email has been sent and the role will be claimed automatically on signup." });
   };
 
   const handleRevokeInvitation = async (invitationId: string) => {
