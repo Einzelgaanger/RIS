@@ -2,6 +2,8 @@ import { useMemo, useState } from 'react';
 import { Building2, Download, Grid, List, MapPin, Search, Star } from 'lucide-react';
 
 import { useResourcesQuery } from '@/hooks/use-backend-data';
+import { usePagination } from '@/hooks/use-pagination';
+import PaginationControls from '@/components/shared/PaginationControls';
 import { useAuth } from '@/contexts/AuthContext';
 import { Resource, Tier } from '@/types';
 import { Button } from '@/components/ui/button';
@@ -39,6 +41,7 @@ export default function Resources() {
     });
   }, [resources, searchQuery, selectedTier]);
 
+  const pagination = usePagination(filteredResources, 24);
   return (
     <div className="space-y-6 animate-fade-in">
       <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
@@ -91,13 +94,13 @@ export default function Resources() {
         </Card>
       ) : viewMode === 'grid' ? (
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {filteredResources.map((resource) => (
+          {pagination.items.map((resource) => (
             <ResourceCard key={resource.id} resource={resource} onClick={() => setSelectedResource(resource)} showPricing />
           ))}
         </div>
       ) : (
         <div className="space-y-2">
-          {filteredResources.map((resource) => (
+          {pagination.items.map((resource) => (
             <Card key={resource.id} className="card-interactive" onClick={() => setSelectedResource(resource)}>
               <CardContent className="flex items-center gap-4 p-4">
                 <Avatar className="h-10 w-10">
@@ -120,6 +123,20 @@ export default function Resources() {
             </Card>
           ))}
         </div>
+      )}
+
+      {!isLoading && filteredResources.length > 0 && (
+        <PaginationControls
+          page={pagination.page}
+          totalPages={pagination.totalPages}
+          totalItems={pagination.totalItems}
+          pageSize={pagination.pageSize}
+          hasNext={pagination.hasNext}
+          hasPrev={pagination.hasPrev}
+          onNext={pagination.nextPage}
+          onPrev={pagination.prevPage}
+          onGoToPage={pagination.goToPage}
+        />
       )}
 
       <Dialog open={!!selectedResource} onOpenChange={(open) => !open && setSelectedResource(null)}>

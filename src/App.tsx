@@ -17,6 +17,7 @@ import Opportunities from "@/pages/Opportunities";
 import Analytics from "@/pages/Analytics";
 import Reports from "@/pages/Reports";
 import WorkspaceSetup from "@/pages/WorkspaceSetup";
+import MyProfile from "@/pages/MyProfile";
 import NotFound from "@/pages/NotFound";
 import Unsubscribe from "@/pages/Unsubscribe";
 
@@ -36,7 +37,6 @@ const App = () => (
               <Route path="/reset-password" element={<ResetPassword />} />
               <Route path="/unsubscribe" element={<Unsubscribe />} />
               <Route element={<AppLayout />}>
-
                 <Route path="dashboard" element={<Dashboard />} />
                 <Route path="resources" element={<Resources />} />
                 <Route path="team-builder" element={<TeamBuilder />} />
@@ -44,6 +44,7 @@ const App = () => (
                 <Route path="analytics" element={<Analytics />} />
                 <Route path="reports" element={<Reports />} />
                 <Route path="workspace" element={<WorkspaceSetup />} />
+                <Route path="profile" element={<MyProfile />} />
               </Route>
               <Route path="*" element={<NotFound />} />
             </Routes>
