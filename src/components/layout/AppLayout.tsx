@@ -91,7 +91,7 @@ export default function AppLayout() {
         {/* Brand */}
         <div className="flex h-16 items-center justify-between border-b border-sidebar-border px-5">
           <div className="flex items-center gap-2">
-            <img src={vggLogo} alt="Venture Garden Group" className="h-8 w-8 object-contain" />
+            <img src={vggLogo} alt="Venture Garden Group" className="h-7 brightness-0 invert" />
             <div className="flex flex-col leading-tight">
               <span className="text-[10px] font-semibold uppercase tracking-widest text-sidebar-foreground/60">RIP</span>
             </div>
