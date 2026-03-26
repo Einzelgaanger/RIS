@@ -135,6 +135,19 @@ export default function MyProfile() {
       .filter((c) => c.name.trim())
       .map((c) => ({ name: c.name, issuer: c.issuer, year: c.year })) as unknown as Record<string, unknown>[];
 
+    // Get profile id
+    const { data: profileRow } = await supabase
+      .from("profiles")
+      .select("id")
+      .eq("user_id", user.id)
+      .single();
+
+    if (!profileRow) {
+      setIsSaving(false);
+      toast({ title: "Profile not found", variant: "destructive" });
+      return;
+    }
+
     const resourceData: any = {
       full_name: user.fullName,
       email: user.email,
@@ -148,7 +161,7 @@ export default function MyProfile() {
       skills: cleanSkills,
       certifications: cleanCerts,
       organization: user.organization || null,
-      profile_id: profile.id,
+      profile_id: profileRow.id,
       created_by: user.id,
     };
 
