@@ -12,7 +12,7 @@ import {
 
 import { Button } from '@/components/ui/button';
 import { useAuth } from '@/contexts/AuthContext';
-import { ThemeToggle } from '@/components/ThemeToggle';
+
 import heroImage from '@/assets/hero-team.jpg';
 import patternBg from '@/assets/pattern-bg.jpg';
 import vggLogo from '@/assets/vgg-logo.webp';
@@ -83,7 +83,6 @@ export default function Index() {
           </Link>
 
           <div className="flex items-center gap-2">
-            <ThemeToggle />
             <Button asChild variant="ghost" size="sm" className="hidden sm:inline-flex">
               <Link to="/login">Sign in</Link>
             </Button>
@@ -100,7 +99,7 @@ export default function Index() {
       <section className="relative overflow-hidden">
         <div className="absolute inset-0">
           <img src={heroImage} alt="" className="h-full w-full object-cover" width={1920} height={1080} />
-          <div className="absolute inset-0 bg-background/90 dark:bg-background/95" />
+          <div className="absolute inset-0 bg-background/90" />
         </div>
 
         <div className="relative mx-auto max-w-7xl px-4 py-28 sm:px-6 sm:py-36 lg:px-8 lg:py-44">
@@ -179,7 +178,7 @@ export default function Index() {
       {/* ─── CTA Band ─── */}
       <section className="relative overflow-hidden">
         <img src={patternBg} alt="" className="absolute inset-0 h-full w-full object-cover" loading="lazy" width={1920} height={600} />
-        <div className="absolute inset-0 bg-primary/85 dark:bg-primary/80" />
+        <div className="absolute inset-0 bg-primary/85" />
         <div className="relative mx-auto max-w-3xl px-4 py-24 text-center sm:py-32">
           <h2 className="font-display text-3xl font-bold text-primary-foreground sm:text-4xl">
             Ready to modernise your talent operations?
