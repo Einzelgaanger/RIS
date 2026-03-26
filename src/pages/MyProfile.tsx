@@ -360,34 +360,39 @@ export default function MyProfile() {
                 <p className="text-sm text-muted-foreground">No certifications added yet.</p>
               ) : (
                 certifications.map((cert, index) => (
-                  <div key={index} className="flex items-end gap-3 rounded-xl border p-3">
-                    <div className="flex-1 space-y-1">
-                      <Label className="text-xs">Certification</Label>
-                      <Input
-                        value={cert.name}
-                        onChange={(e) => updateCertification(index, { name: e.target.value })}
-                        placeholder="e.g. AWS Solutions Architect"
-                      />
+                  <div key={index} className="space-y-3 rounded-xl border p-3">
+                    <div className="flex items-center justify-between">
+                      <Label className="text-xs font-medium">Certification {index + 1}</Label>
+                      <Button variant="ghost" size="icon" onClick={() => removeCertification(index)} className="shrink-0 h-7 w-7">
+                        <Trash2 className="h-4 w-4 text-destructive" />
+                      </Button>
                     </div>
-                    <div className="w-40 space-y-1">
-                      <Label className="text-xs">Issuer</Label>
-                      <Input
-                        value={cert.issuer}
-                        onChange={(e) => updateCertification(index, { issuer: e.target.value })}
-                        placeholder="e.g. Amazon"
-                      />
+                    <div className="grid gap-3 sm:grid-cols-[1fr_10rem_6rem]">
+                      <div className="space-y-1">
+                        <Label className="text-xs">Certification</Label>
+                        <Input
+                          value={cert.name}
+                          onChange={(e) => updateCertification(index, { name: e.target.value })}
+                          placeholder="e.g. AWS Solutions Architect"
+                        />
+                      </div>
+                      <div className="space-y-1">
+                        <Label className="text-xs">Issuer</Label>
+                        <Input
+                          value={cert.issuer}
+                          onChange={(e) => updateCertification(index, { issuer: e.target.value })}
+                          placeholder="e.g. Amazon"
+                        />
+                      </div>
+                      <div className="space-y-1">
+                        <Label className="text-xs">Year</Label>
+                        <Input
+                          type="number"
+                          value={cert.year}
+                          onChange={(e) => updateCertification(index, { year: Number(e.target.value) })}
+                        />
+                      </div>
                     </div>
-                    <div className="w-24 space-y-1">
-                      <Label className="text-xs">Year</Label>
-                      <Input
-                        type="number"
-                        value={cert.year}
-                        onChange={(e) => updateCertification(index, { year: Number(e.target.value) })}
-                      />
-                    </div>
-                    <Button variant="ghost" size="icon" onClick={() => removeCertification(index)} className="shrink-0">
-                      <Trash2 className="h-4 w-4 text-destructive" />
-                    </Button>
                   </div>
                 ))
               )}
