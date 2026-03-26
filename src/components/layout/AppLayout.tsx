@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react';
+import vggLogo from '@/assets/vgg-logo.webp';
 import { Link, useLocation, Outlet, Navigate } from 'react-router-dom';
 import {
   LayoutDashboard,
@@ -89,9 +90,11 @@ export default function AppLayout() {
       >
         {/* Brand */}
         <div className="flex h-16 items-center justify-between border-b border-sidebar-border px-5">
-          <div className="flex flex-col">
-            <span className="font-display text-lg font-bold tracking-tight text-sidebar-foreground">GVTS RIP</span>
-            <span className="text-[11px] font-medium uppercase tracking-widest text-sidebar-foreground/50">Resource Intelligence</span>
+          <div className="flex items-center gap-2">
+            <img src={vggLogo} alt="Venture Garden Group" className="h-7 brightness-0 invert" />
+            <div className="flex flex-col leading-tight">
+              <span className="text-[10px] font-semibold uppercase tracking-widest text-sidebar-foreground/60">RIP</span>
+            </div>
           </div>
           <Button variant="ghost" size="icon" className="text-sidebar-foreground lg:hidden" onClick={() => setSidebarOpen(false)}>
             <X className="h-5 w-5" />
