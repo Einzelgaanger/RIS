@@ -19,7 +19,7 @@ import {
 
 import { useAuth } from '@/contexts/AuthContext';
 import { getRoleLabel } from '@/lib/domain';
-import { ThemeToggle } from '@/components/ThemeToggle';
+
 import NotificationCenter from '@/components/notifications/NotificationCenter';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
@@ -91,7 +91,7 @@ export default function AppLayout() {
         {/* Brand */}
         <div className="flex h-16 items-center justify-between border-b border-sidebar-border px-5">
           <div className="flex items-center gap-2">
-            <img src={vggLogo} alt="Venture Garden Group" className="h-7 brightness-0 invert" />
+            <img src={vggLogo} alt="Venture Garden Group" className="h-8 w-8 object-contain" />
             <div className="flex flex-col leading-tight">
               <span className="text-[10px] font-semibold uppercase tracking-widest text-sidebar-foreground/60">RIP</span>
             </div>
@@ -156,7 +156,6 @@ export default function AppLayout() {
 
           <div className="flex items-center gap-1">
             <NotificationCenter />
-            <ThemeToggle />
 
             <DropdownMenu>
               <DropdownMenuTrigger asChild>

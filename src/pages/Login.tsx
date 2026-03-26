@@ -86,7 +86,7 @@ export default function Login() {
         <div className="absolute inset-0 bg-primary/60" />
         <div className="relative z-10 flex flex-col justify-between p-12 text-primary-foreground">
           <div>
-            <img src={vggLogo} alt="Venture Garden Group" className="h-8 brightness-0 invert" />
+            <img src={vggLogo} alt="Venture Garden Group" className="h-10 w-10 object-contain" />
             <p className="mt-1 text-sm text-primary-foreground/80">Resource Intelligence Platform</p>
           </div>
 
@@ -139,7 +139,7 @@ export default function Login() {
             <Link to="/"><ArrowLeft className="h-4 w-4" /> Back to Home</Link>
           </Button>
           <div className="mb-8 lg:hidden">
-            <img src={vggLogo} alt="Venture Garden Group" className="h-7 mb-1" />
+            <img src={vggLogo} alt="Venture Garden Group" className="h-9 w-9 object-contain mb-1" />
             <p className="text-sm text-muted-foreground">Resource Intelligence Platform</p>
           </div>
 

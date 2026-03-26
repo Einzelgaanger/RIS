@@ -12,7 +12,7 @@ import {
 
 import { Button } from '@/components/ui/button';
 import { useAuth } from '@/contexts/AuthContext';
-import { ThemeToggle } from '@/components/ThemeToggle';
+
 import heroImage from '@/assets/hero-team.jpg';
 import patternBg from '@/assets/pattern-bg.jpg';
 import vggLogo from '@/assets/vgg-logo.webp';
@@ -76,14 +76,13 @@ export default function Index() {
       <nav className="sticky top-0 z-50 border-b border-border/60 bg-background/80 backdrop-blur-xl">
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
           <Link to="/" className="flex items-center gap-2.5">
-            <img src={vggLogo} alt="Venture Garden Group" className="h-8" />
+            <img src={vggLogo} alt="Venture Garden Group" className="h-9 w-9 object-contain" />
             <span className="hidden text-[10px] font-semibold uppercase tracking-widest text-muted-foreground sm:block">
               Resource Intelligence Platform
             </span>
           </Link>
 
           <div className="flex items-center gap-2">
-            <ThemeToggle />
             <Button asChild variant="ghost" size="sm" className="hidden sm:inline-flex">
               <Link to="/login">Sign in</Link>
             </Button>
@@ -100,7 +99,7 @@ export default function Index() {
       <section className="relative overflow-hidden">
         <div className="absolute inset-0">
           <img src={heroImage} alt="" className="h-full w-full object-cover" width={1920} height={1080} />
-          <div className="absolute inset-0 bg-background/90 dark:bg-background/95" />
+          <div className="absolute inset-0 bg-background/90" />
         </div>
 
         <div className="relative mx-auto max-w-7xl px-4 py-28 sm:px-6 sm:py-36 lg:px-8 lg:py-44">
@@ -179,7 +178,7 @@ export default function Index() {
       {/* ─── CTA Band ─── */}
       <section className="relative overflow-hidden">
         <img src={patternBg} alt="" className="absolute inset-0 h-full w-full object-cover" loading="lazy" width={1920} height={600} />
-        <div className="absolute inset-0 bg-primary/85 dark:bg-primary/80" />
+        <div className="absolute inset-0 bg-primary/85" />
         <div className="relative mx-auto max-w-3xl px-4 py-24 text-center sm:py-32">
           <h2 className="font-display text-3xl font-bold text-primary-foreground sm:text-4xl">
             Ready to modernise your talent operations?
@@ -222,7 +221,7 @@ export default function Index() {
       <footer className="border-t border-border/60 bg-card py-10">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-4 sm:flex-row sm:px-6 lg:px-8">
           <div className="flex items-center gap-2">
-            <img src={vggLogo} alt="Venture Garden Group" className="h-6" loading="lazy" />
+            <img src={vggLogo} alt="Venture Garden Group" className="h-7 w-7 object-contain" loading="lazy" />
             <span className="font-display text-sm font-bold">Resource Intelligence Platform</span>
           </div>
           <p className="text-xs text-muted-foreground">&copy; {new Date().getFullYear()} Venture Garden Group. All rights reserved.</p>

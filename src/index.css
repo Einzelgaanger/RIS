@@ -65,50 +65,6 @@
     --sidebar-ring: 100 55% 50%;
   }
 
-  .dark {
-    --background: 160 20% 7%;
-    --foreground: 140 10% 95%;
-
-    --card: 160 22% 10%;
-    --card-foreground: 140 10% 95%;
-
-    --popover: 160 22% 10%;
-    --popover-foreground: 140 10% 95%;
-
-    --primary: 100 55% 48%;
-    --primary-foreground: 0 0% 100%;
-
-    --secondary: 205 80% 45%;
-    --secondary-foreground: 0 0% 100%;
-
-    --muted: 160 18% 15%;
-    --muted-foreground: 140 8% 55%;
-
-    --accent: 160 20% 14%;
-    --accent-foreground: 100 55% 55%;
-
-    --destructive: 0 75% 50%;
-    --destructive-foreground: 0 0% 100%;
-
-    --success: 100 55% 40%;
-    --success-foreground: 0 0% 100%;
-
-    --warning: 38 95% 48%;
-    --warning-foreground: 0 0% 100%;
-
-    --border: 160 18% 16%;
-    --input: 160 18% 16%;
-    --ring: 100 55% 48%;
-
-    --sidebar-background: 160 30% 6%;
-    --sidebar-foreground: 140 10% 92%;
-    --sidebar-primary: 100 55% 50%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 160 22% 12%;
-    --sidebar-accent-foreground: 140 10% 92%;
-    --sidebar-border: 160 18% 12%;
-    --sidebar-ring: 100 55% 50%;
-  }
 }
 
 @layer base {
@@ -235,7 +191,7 @@
 
   /* Glass effect */
   .glass {
-    @apply bg-white/70 dark:bg-black/50 backdrop-blur-lg;
+    @apply bg-white/70 backdrop-blur-lg;
   }
 }
 
