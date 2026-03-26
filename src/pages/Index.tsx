@@ -11,6 +11,7 @@ import {
 } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
+import { useAuth } from '@/contexts/AuthContext';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import heroImage from '@/assets/hero-team.jpg';
 import patternBg from '@/assets/pattern-bg.jpg';
