@@ -76,7 +76,7 @@ export default function Index() {
       <nav className="sticky top-0 z-50 border-b border-border/60 bg-background/80 backdrop-blur-xl">
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
           <Link to="/" className="flex items-center gap-2.5">
-            <img src={vggLogo} alt="Venture Garden Group" className="h-8" />
+            <img src={vggLogo} alt="Venture Garden Group" className="h-9 w-9 object-contain" />
             <span className="hidden text-[10px] font-semibold uppercase tracking-widest text-muted-foreground sm:block">
               Resource Intelligence Platform
             </span>
@@ -221,7 +221,7 @@ export default function Index() {
       <footer className="border-t border-border/60 bg-card py-10">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-4 sm:flex-row sm:px-6 lg:px-8">
           <div className="flex items-center gap-2">
-            <img src={vggLogo} alt="Venture Garden Group" className="h-6" loading="lazy" />
+            <img src={vggLogo} alt="Venture Garden Group" className="h-7 w-7 object-contain" loading="lazy" />
             <span className="font-display text-sm font-bold">Resource Intelligence Platform</span>
           </div>
           <p className="text-xs text-muted-foreground">&copy; {new Date().getFullYear()} Venture Garden Group. All rights reserved.</p>
