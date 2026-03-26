@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { Briefcase, CheckCircle, Clock, Eye, Send, Users } from 'lucide-react';
+import type { Team } from '@/types';
 
 import { useAuth } from '@/contexts/AuthContext';
 import {
@@ -77,7 +78,7 @@ export default function ProfessionalDashboard() {
     [teamMembers, user?.id],
   );
 
-  const teamMap = useMemo(
+  const teamMap = useMemo<Map<string, Team>>(
     () => new Map(teams.map((team) => [team.id, team])),
     [teams],
   );
