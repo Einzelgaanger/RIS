@@ -9,6 +9,7 @@ import {
   Heading,
   Hr,
   Html,
+  Img,
   Preview,
   Section,
   Text,
@@ -18,7 +19,8 @@ interface ReauthenticationEmailProps {
   token: string
 }
 
-const SITE = 'GVTS RIP'
+const SITE = 'VGG RIP'
+const LOGO_URL = 'https://team-weave-iq.lovable.app/vgg-logo.webp'
 
 export const ReauthenticationEmail = ({ token }: ReauthenticationEmailProps) => (
   <Html lang="en" dir="ltr">
@@ -27,7 +29,7 @@ export const ReauthenticationEmail = ({ token }: ReauthenticationEmailProps) => 
     <Body style={main}>
       <Container style={container}>
         <Section style={header}>
-          <Text style={logo}>{SITE}</Text>
+          <Img src={LOGO_URL} alt="VGG" width="120" height="40" style={logoImg} />
           <Text style={tagline}>Resource Intelligence Platform</Text>
         </Section>
         <Hr style={divider} />
@@ -52,12 +54,12 @@ export default ReauthenticationEmail
 const main = { backgroundColor: '#f2f4f7', fontFamily: "'Plus Jakarta Sans', 'Helvetica Neue', Arial, sans-serif" }
 const container = { backgroundColor: '#ffffff', borderRadius: '8px', margin: '40px auto', padding: '0', maxWidth: '480px', border: '1px solid #e2e6ed' }
 const header = { padding: '28px 32px 0', textAlign: 'center' as const }
-const logo = { fontSize: '20px', fontWeight: '700' as const, color: '#0055B3', margin: '0', letterSpacing: '-0.3px' }
-const tagline = { fontSize: '11px', color: '#47536B', margin: '2px 0 0', textTransform: 'uppercase' as const, letterSpacing: '1px' }
+const logoImg = { margin: '0 auto', objectFit: 'contain' as const }
+const tagline = { fontSize: '11px', color: '#47536B', margin: '8px 0 0', textTransform: 'uppercase' as const, letterSpacing: '1px' }
 const divider = { borderColor: '#e2e6ed', margin: '20px 32px' }
-const h1 = { fontSize: '22px', fontWeight: '700' as const, color: '#161E2E', margin: '0 32px 16px', padding: '0' }
+const h1 = { fontSize: '22px', fontWeight: '700' as const, color: '#161E2E', margin: '0 32px 16px', padding: '0', fontFamily: "'Space Grotesk', 'Helvetica Neue', Arial, sans-serif" }
 const text = { fontSize: '14px', color: '#47536B', lineHeight: '1.6', margin: '0 32px 20px' }
-const codeSection = { textAlign: 'center' as const, margin: '0 32px 24px', backgroundColor: '#f2f4f7', borderRadius: '8px', padding: '16px' }
-const codeStyle = { fontFamily: "'Space Grotesk', Courier, monospace", fontSize: '28px', fontWeight: '700' as const, color: '#0055B3', margin: '0', letterSpacing: '4px' }
+const codeSection = { textAlign: 'center' as const, margin: '0 32px 24px', backgroundColor: '#f0f7eb', borderRadius: '8px', padding: '16px', border: '1px solid #d4e8c7' }
+const codeStyle = { fontFamily: "'Space Grotesk', Courier, monospace", fontSize: '28px', fontWeight: '700' as const, color: '#4d8c2a', margin: '0', letterSpacing: '4px' }
 const hint = { fontSize: '12px', color: '#8090a7', lineHeight: '1.5', margin: '0 32px 24px' }
 const footer = { fontSize: '11px', color: '#8090a7', textAlign: 'center' as const, margin: '0', padding: '0 32px 28px' }
