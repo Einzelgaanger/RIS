@@ -100,7 +100,7 @@ export default function Index() {
       <section className="relative overflow-hidden">
         <div className="absolute inset-0">
           <img src={heroImage} alt="" className="h-full w-full object-cover" width={1920} height={1080} />
-          <div className="absolute inset-0 bg-gradient-to-r from-background via-background/95 to-background/50 dark:from-background dark:via-background/98 dark:to-background/70" />
+          <div className="absolute inset-0 bg-background/90 dark:bg-background/95" />
         </div>
 
         <div className="relative mx-auto max-w-7xl px-4 py-28 sm:px-6 sm:py-36 lg:px-8 lg:py-44">

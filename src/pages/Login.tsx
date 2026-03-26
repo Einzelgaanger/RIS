@@ -83,7 +83,7 @@ export default function Login() {
     <div className="flex min-h-screen overflow-hidden bg-background">
       <div className="relative hidden lg:flex lg:w-1/2 xl:w-3/5">
         <img src={authHeroImage} alt="GVTS Resource Intelligence Platform" className="absolute inset-0 h-full w-full object-cover" />
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/70 via-primary/40 to-transparent" />
+        <div className="absolute inset-0 bg-primary/60" />
         <div className="relative z-10 flex flex-col justify-between p-12 text-primary-foreground">
           <div>
             <img src={vggLogo} alt="Venture Garden Group" className="h-8 brightness-0 invert" />
