@@ -240,7 +240,7 @@ export default function ProfessionalDashboard() {
                     <p className="text-sm text-muted-foreground">{opp.client || 'Client not set'}</p>
                     <div className="mt-2 flex flex-wrap gap-1">
                       {opp.required_skills.slice(0, 3).map((skill) => (
-                        <span key={skill} className="skill-pill text-xs">{skill}</span>
+        <span key={skill} className="skill-pill text-xs">{skill}</span>
                       ))}
                     </div>
                   </div>
