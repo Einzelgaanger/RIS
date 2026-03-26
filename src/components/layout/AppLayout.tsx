@@ -152,6 +152,7 @@ export default function AppLayout() {
           </div>
 
           <div className="flex items-center gap-1">
+            <NotificationCenter />
             <ThemeToggle />
 
             <DropdownMenu>
