@@ -241,11 +241,11 @@ export default function MyProfile() {
       </div>
 
       <Tabs defaultValue="profile" className="space-y-4">
-        <TabsList className="grid w-full grid-cols-4">
-          <TabsTrigger value="profile"><User className="mr-2 h-4 w-4" />Profile</TabsTrigger>
-          <TabsTrigger value="skills"><Award className="mr-2 h-4 w-4" />Skills</TabsTrigger>
-          <TabsTrigger value="availability"><Globe className="mr-2 h-4 w-4" />Availability</TabsTrigger>
-          <TabsTrigger value="activity"><Briefcase className="mr-2 h-4 w-4" />Activity</TabsTrigger>
+        <TabsList className="grid w-full grid-cols-2 sm:grid-cols-4">
+          <TabsTrigger value="profile"><User className="mr-1.5 h-4 w-4 hidden sm:inline" />Profile</TabsTrigger>
+          <TabsTrigger value="skills"><Award className="mr-1.5 h-4 w-4 hidden sm:inline" />Skills</TabsTrigger>
+          <TabsTrigger value="availability"><Globe className="mr-1.5 h-4 w-4 hidden sm:inline" />Availability</TabsTrigger>
+          <TabsTrigger value="activity"><Briefcase className="mr-1.5 h-4 w-4 hidden sm:inline" />Activity</TabsTrigger>
         </TabsList>
 
         {/* Profile Tab */}
