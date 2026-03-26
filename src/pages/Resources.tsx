@@ -2,6 +2,8 @@ import { useMemo, useState } from 'react';
 import { Building2, Download, Grid, List, MapPin, Search, Star } from 'lucide-react';
 
 import { useResourcesQuery } from '@/hooks/use-backend-data';
+import { usePagination } from '@/hooks/use-pagination';
+import PaginationControls from '@/components/shared/PaginationControls';
 import { useAuth } from '@/contexts/AuthContext';
 import { Resource, Tier } from '@/types';
 import { Button } from '@/components/ui/button';
