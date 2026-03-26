@@ -298,43 +298,48 @@ export default function MyProfile() {
             </CardHeader>
             <CardContent className="space-y-3">
               {skills.map((skill, index) => (
-                <div key={index} className="flex items-end gap-3 rounded-xl border p-3">
-                  <div className="flex-1 space-y-1">
-                    <Label className="text-xs">Skill name</Label>
-                    <Input
-                      value={skill.name}
-                      onChange={(e) => updateSkill(index, { name: e.target.value })}
-                      placeholder="e.g. Python, Project Management"
-                    />
+                <div key={index} className="space-y-3 rounded-xl border p-3">
+                  <div className="flex items-center justify-between">
+                    <Label className="text-xs font-medium">Skill {index + 1}</Label>
+                    <Button variant="ghost" size="icon" onClick={() => removeSkill(index)} className="shrink-0 h-7 w-7">
+                      <Trash2 className="h-4 w-4 text-destructive" />
+                    </Button>
                   </div>
-                  <div className="w-32 space-y-1">
-                    <Label className="text-xs">Proficiency</Label>
-                    <Select
-                      value={String(skill.proficiency)}
-                      onValueChange={(v) => updateSkill(index, { proficiency: Number(v) as Skill["proficiency"] })}
-                    >
-                      <SelectTrigger><SelectValue /></SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="1">1 – Junior</SelectItem>
-                        <SelectItem value="2">2 – Intermediate</SelectItem>
-                        <SelectItem value="3">3 – Proficient</SelectItem>
-                        <SelectItem value="4">4 – Advanced</SelectItem>
-                        <SelectItem value="5">5 – Expert</SelectItem>
-                      </SelectContent>
-                    </Select>
+                  <div className="grid gap-3 sm:grid-cols-[1fr_8rem_6rem]">
+                    <div className="space-y-1">
+                      <Label className="text-xs">Skill name</Label>
+                      <Input
+                        value={skill.name}
+                        onChange={(e) => updateSkill(index, { name: e.target.value })}
+                        placeholder="e.g. Python, Project Management"
+                      />
+                    </div>
+                    <div className="space-y-1">
+                      <Label className="text-xs">Proficiency</Label>
+                      <Select
+                        value={String(skill.proficiency)}
+                        onValueChange={(v) => updateSkill(index, { proficiency: Number(v) as Skill["proficiency"] })}
+                      >
+                        <SelectTrigger><SelectValue /></SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="1">1 – Junior</SelectItem>
+                          <SelectItem value="2">2 – Intermediate</SelectItem>
+                          <SelectItem value="3">3 – Proficient</SelectItem>
+                          <SelectItem value="4">4 – Advanced</SelectItem>
+                          <SelectItem value="5">5 – Expert</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    <div className="space-y-1">
+                      <Label className="text-xs">Years</Label>
+                      <Input
+                        type="number"
+                        min="0"
+                        value={skill.yearsExperience}
+                        onChange={(e) => updateSkill(index, { yearsExperience: Number(e.target.value) })}
+                      />
+                    </div>
                   </div>
-                  <div className="w-24 space-y-1">
-                    <Label className="text-xs">Years</Label>
-                    <Input
-                      type="number"
-                      min="0"
-                      value={skill.yearsExperience}
-                      onChange={(e) => updateSkill(index, { yearsExperience: Number(e.target.value) })}
-                    />
-                  </div>
-                  <Button variant="ghost" size="icon" onClick={() => removeSkill(index)} className="shrink-0">
-                    <Trash2 className="h-4 w-4 text-destructive" />
-                  </Button>
                 </div>
               ))}
             </CardContent>
