@@ -1,5 +1,9 @@
 # RIS
 
+## Environment variables
+
+Copy `.env.example` to `.env` and fill in values from your Supabase project. Do not commit `.env`. Client-side code only uses `VITE_*` variables (see Vite docs); never put service role or other server-only secrets in `VITE_*`.
+
 ## How to run locally
 
 Requirements: Node.js and npm ([install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)).

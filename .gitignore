@@ -17,6 +17,17 @@ dist-ssr
 .env.*
 !.env.example
 
+# Certificates, keys, and local credential files
+*.pem
+*.p12
+*.key
+credentials.json
+credentials.*.json
+
+# Local data exports / dumps (uncomment or extend paths if you add them)
+# /data/
+# /exports/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
