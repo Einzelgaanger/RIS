@@ -84,7 +84,7 @@ export default function AppLayout() {
       {/* Sidebar */}
       <aside
         className={cn(
-          'fixed inset-y-0 left-0 z-50 flex w-64 flex-col bg-sidebar transition-transform duration-200 ease-in-out lg:translate-x-0',
+          'fixed inset-y-0 left-0 z-50 flex w-64 flex-col border-r border-sidebar-border bg-sidebar transition-transform duration-200 ease-in-out lg:translate-x-0',
           sidebarOpen ? 'translate-x-0' : '-translate-x-full',
         )}
       >
@@ -102,7 +102,7 @@ export default function AppLayout() {
         </div>
 
         {/* Nav links */}
-        <nav className="flex-1 space-y-1 overflow-y-auto px-3 py-4 scrollbar-thin">
+        <nav className="flex-1 space-y-1.5 overflow-y-auto px-3 py-4 scrollbar-thin">
           {filteredNav.map((item) => {
             const isActive = location.pathname === item.href;
             return (
@@ -111,9 +111,9 @@ export default function AppLayout() {
                 to={item.href}
                 onClick={() => setSidebarOpen(false)}
                 className={cn(
-                  'group flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-all',
+                  'group flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-all duration-200',
                   isActive
-                    ? 'bg-sidebar-accent text-sidebar-primary shadow-sm'
+                    ? 'bg-sidebar-accent text-sidebar-primary shadow-sm ring-1 ring-sidebar-border/70'
                     : 'text-sidebar-foreground/70 hover:bg-sidebar-accent/60 hover:text-sidebar-foreground',
                 )}
               >
@@ -144,13 +144,13 @@ export default function AppLayout() {
       {/* Main area */}
       <div className="lg:pl-64">
         {/* Top bar */}
-        <header className="sticky top-0 z-30 flex h-14 items-center justify-between border-b bg-card/80 px-4 backdrop-blur-md lg:px-6">
+        <header className="sticky top-0 z-30 flex h-14 items-center justify-between border-b bg-card/90 px-4 backdrop-blur-md lg:px-6">
           <div className="flex items-center gap-3">
             <Button variant="ghost" size="icon" className="lg:hidden" onClick={() => setSidebarOpen(true)}>
               <Menu className="h-5 w-5" />
             </Button>
             <div className="hidden sm:block">
-              <p className="text-sm font-semibold">Resource Intelligence Platform</p>
+              <p className="text-sm font-semibold tracking-tight">Resource Intelligence Platform</p>
             </div>
           </div>
 
@@ -190,7 +190,7 @@ export default function AppLayout() {
           </div>
         </header>
 
-        <main className="p-4 lg:p-6">
+        <main className="mx-auto w-full max-w-[1400px] p-4 lg:p-6">
           <Outlet />
         </main>
       </div>

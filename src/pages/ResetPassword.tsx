@@ -8,6 +8,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { supabase } from "@/integrations/supabase/client";
+import vggLogo from "@/assets/vgg-logo.webp";
 
 export default function ResetPassword() {
   const hashParams = useMemo(() => new URLSearchParams(window.location.hash.replace(/^#/, "")), []);
@@ -51,11 +52,16 @@ export default function ResetPassword() {
   };
 
   return (
-    <div className="min-h-screen bg-background px-4 py-12">
-      <div className="mx-auto max-w-md">
-        <Card>
+    <div className="relative min-h-screen bg-dot-grid px-4 py-12">
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-background via-transparent to-muted/40" aria-hidden />
+      <div className="relative mx-auto max-w-md">
+        <div className="mb-8 flex flex-col items-center text-center">
+          <img src={vggLogo} alt="Venture Garden Group" className="h-9" />
+          <p className="mt-2 text-sm text-muted-foreground">Resource Intelligence Platform</p>
+        </div>
+        <Card className="border-border/70 shadow-xl shadow-primary/5">
           <CardHeader>
-            <CardTitle className="flex items-center gap-2">
+            <CardTitle className="flex items-center gap-2 font-display text-xl">
               <KeyRound className="h-5 w-5 text-primary" />
               Reset password
             </CardTitle>
@@ -128,6 +134,11 @@ export default function ResetPassword() {
             )}
           </CardContent>
         </Card>
+        <p className="mt-6 text-center text-sm text-muted-foreground">
+          <Link to="/login" className="font-medium text-primary hover:underline">
+            Back to sign in
+          </Link>
+        </p>
       </div>
     </div>
   );

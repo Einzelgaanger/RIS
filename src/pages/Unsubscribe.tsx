@@ -52,8 +52,9 @@ export default function Unsubscribe() {
   }, [token]);
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background p-4">
-      <Card className="w-full max-w-md">
+    <div className="relative flex min-h-screen items-center justify-center bg-dot-grid p-4">
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-background via-transparent to-muted/40" aria-hidden />
+      <Card className="relative w-full max-w-md border-border/70 shadow-xl shadow-primary/5">
         <CardContent className="flex flex-col items-center gap-4 p-8 text-center">
           {status === 'loading' && (
             <>
